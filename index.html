@@ -25,6 +25,24 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .company-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .company-grid .card h3 { margin-bottom: 10px; font-size: 19px; }
+    .company-grid .card p { color: var(--text2); font-size: 15px; }
+    .company-fact { margin-top: 10px; font-weight: 600; color: var(--text); font-size: 14px; }
+    .company-lead { font-weight: 700; color: var(--blue-dark); margin-bottom: 6px; }
+    .company-en { display: block; font-size: 13.5px; color: var(--text2); font-weight: 400; margin-top: 2px; }
+    .company-grid .card a { color: var(--blue-dark); font-weight: 600; }
+    .company-list { list-style: none; padding: 0; margin: 0; color: var(--text2); font-size: 15px; }
+    .company-list li { padding: 6px 0; border-bottom: 1px dashed var(--border); }
+    .company-list li:last-child { border-bottom: none; }
+    @media (max-width: 760px) {
+      .company-grid { grid-template-columns: 1fr; }
+    }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
@@ -555,6 +573,38 @@
           <div class="faq-a">
             네. 먼저 설정한 부모 폰에서 ‘부모 초대·설정 복제 QR’을 띄우고 다른 부모 폰으로 스캔하면, 등록된 아이 프로필과 시간표·도서관·약상자 설정이 그대로 복제됩니다.
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="company">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">HAMANKOREA · 하만코리아</div>
+        <h2>I-SAFE와 CODEPOP을 만드는 회사</h2>
+        <p class="company-lead">The company behind I-SAFE and CODEPOP</p>
+        <p>I-SAFE와 CODEPOP은 하만코리아(하만글로벌)가 직접 개발·운영하는 앱이며, Google Play 개발자 <strong>HAMAN</strong> 계정으로 배포됩니다.<br>
+        Both apps are developed and operated by HamanKorea (HamanGlobal) and published on Google Play under the developer name <strong>HAMAN</strong>.</p>
+      </div>
+      <div class="company-grid">
+        <div class="card">
+          <h3>CODEPOP · 코드팝</h3>
+          <p>10배 확대 Wi-Fi 현미경 카메라로 모공·블랙헤드를 확인하고, 9가지 피부 표면 분석 리포트를 제공하는 모바일 앱입니다.</p>
+          <p class="company-en">A mobile app that pairs with a 10x Wi-Fi microscope camera and provides a 9-point skin surface analysis report.</p>
+          <p class="company-fact">Google Play <strong>5,000+ downloads</strong> · Updated 2026-11-08 · Developer HAMAN</p>
+          <a class="btn btn-primary" style="margin-top: 16px;" href="https://play.google.com/store/apps/details?id=com.cooingdv.codepop" target="_blank" rel="noopener">Google Play에서 보기 · View on Google Play</a>
+        </div>
+        <div class="card">
+          <h3>사업자 정보 · Business information</h3>
+          <ul class="company-list">
+            <li>상호 하만코리아 · 브랜드 하만글로벌<br><span class="company-en">HamanKorea · Brand: HamanGlobal</span></li>
+            <li>대표 조철범<br><span class="company-en">Representative: Chulbum Jo</span></li>
+            <li>사업자등록번호 203-12-96262<br><span class="company-en">Business registration no. 203-12-96262</span></li>
+            <li>통신판매업신고 2022-충남아산-0257<br><span class="company-en">E-commerce registration 2022-충남아산-0257</span></li>
+            <li>충남 아산시 둔포면 아산밸리남로 81, 31406<br><span class="company-en">81 Asanvalleynam-ro, Dunpo-myeon, Asan-si, Chungcheongnam-do, 31406, Republic of Korea</span></li>
+            <li><a href="mailto:contact@hamankorea.me">contact@hamankorea.me</a> · <a href="company/">회사 소개 전체 보기 · Company profile</a></li>
+          </ul>
         </div>
       </div>
     </div>

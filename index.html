@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HamanKorea (하만코리아) — AI Diagnostics, Content Automation &amp; Hardware</title>
+<meta name="description" content="HamanKorea (하만코리아 · HamanGlobal) is a Korea-based company building CODEPOP, a Wi-Fi microscope camera based mobile skin and scalp diagnostic solution, AI content and media automation pipelines, and smart beauty and healthcare devices.">
+<meta name="author" content="HamanKorea">
+<link rel="canonical" href="https://hamankorea.me/">
+<meta property="og:title" content="HamanKorea (하만코리아)">
+<meta property="og:description" content="AI diagnostics, content automation, and hardware engineering from Asan, Republic of Korea.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hamankorea.me/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ctext x='32' y='44' font-family='Helvetica,Arial,sans-serif' font-size='34' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink:#0f172a; --muted:#4b5563; --line:#e5e7eb;
+    --brand:#0f766e; --brand-soft:#ecfdf5; --bg:#ffffff; --bg-alt:#f8fafc;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--brand); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1060px; margin:0 auto; padding:0 24px}
+  header.site{
+    position:sticky; top:0; z-index:10; background:rgba(255,255,255,.92);
+    border-bottom:1px solid var(--line); backdrop-filter:saturate(180%) blur(8px);
+  }
+  .bar{display:flex; align-items:center; justify-content:space-between; height:68px; gap:16px}
+  .logo{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px; color:var(--ink)}
+  .logo .mark{
+    width:32px; height:32px; border-radius:9px; background:var(--brand); color:#fff;
+    display:grid; place-items:center; font-size:17px; font-weight:800;
+  }
+  .logo small{display:block; font-weight:500; font-size:11px; color:var(--muted); letter-spacing:.4px}
+  nav a{color:var(--muted); font-size:14px; font-weight:600; margin-left:22px}
+  nav a:hover{color:var(--brand); text-decoration:none}
+  @media(max-width:640px){ nav a{margin-left:14px; font-size:13px} .logo small{display:none} }
+
+  .hero{padding:84px 0 64px; background:
+    radial-gradient(1100px 420px at 12% -10%, #e6fffa 0%, rgba(230,255,250,0) 60%),
+    var(--bg);}
+  .eyebrow{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--brand); background:var(--brand-soft); border:1px solid #ccfbf1; padding:6px 12px; border-radius:999px}
+  h1{font-size:clamp(30px,4.6vw,46px); line-height:1.15; margin:18px 0 14px; letter-spacing:-.02em}
+  h1 .ko{display:block; font-size:.5em; color:var(--muted); font-weight:700; margin-top:12px; letter-spacing:0}
+  .lead{font-size:18px; color:var(--muted); max-width:46rem; margin:0}
+  .cta{margin-top:30px; display:flex; gap:12px; flex-wrap:wrap}
+  .btn{display:inline-block; padding:12px 20px; border-radius:10px; font-weight:700; font-size:15px; border:1px solid transparent}
+  .btn.primary{background:var(--brand); color:#fff}
+  .btn.primary:hover{background:#0b5f59; text-decoration:none}
+  .btn.ghost{border-color:var(--line); color:var(--ink); background:#fff}
+  .btn.ghost:hover{border-color:#cbd5e1; text-decoration:none}
+
+  section{padding:64px 0; border-top:1px solid var(--line)}
+  section.alt{background:var(--bg-alt)}
+  h2{font-size:clamp(22px,2.6vw,28px); margin:0 0 8px; letter-spacing:-.01em}
+  .kicker{font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--brand); margin:0 0 8px}
+  .sub{color:var(--muted); margin:0 0 32px; max-width:52rem}
+
+  .grid{display:grid; gap:20px}
+  .grid.three{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:860px){ .grid.three{grid-template-columns:1fr} }
+
+  .card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px}
+  .card h3{margin:0 0 4px; font-size:18px}
+  .card .ko-name{font-size:13px; color:var(--muted); font-weight:600; margin:0 0 12px}
+  .card p{margin:0 0 12px; font-size:15px; color:#374151}
+  .card ul{margin:0; padding-left:18px; font-size:14.5px; color:#374151}
+  .card li{margin:4px 0}
+  .tag{display:inline-block; font-size:11.5px; font-weight:700; color:var(--brand); background:var(--brand-soft); border:1px solid #ccfbf1; border-radius:999px; padding:3px 10px; margin:0 6px 8px 0}
+
+  .facts{width:100%; border-collapse:collapse; font-size:15px; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden}
+  .facts th, .facts td{padding:13px 16px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top}
+  .facts th{width:34%; color:var(--muted); font-weight:600; background:#fbfcfd}
+  .facts tr:last-child th, .facts tr:last-child td{border-bottom:none}
+
+  .contact-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:20px}
+  @media(max-width:860px){ .contact-grid{grid-template-columns:1fr} }
+  .contact-list{list-style:none; padding:0; margin:0}
+  .contact-list li{padding:10px 0; border-bottom:1px dashed var(--line); font-size:15px}
+  .contact-list li:last-child{border-bottom:none}
+  .contact-list span{display:block; font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:700; margin-bottom:2px}
+
+  footer{padding:36px 0 48px; border-top:1px solid var(--line); background:var(--bg-alt); font-size:13.5px; color:var(--muted)}
+  footer .row{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+  footer p{margin:0 0 6px}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="logo" href="#top" style="color:inherit">
+      <span class="mark">H</span>
+      <span>HamanKorea<small>HAMANGLOBAL · 하만글로벌</small></span>
+    </a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Asan, Republic of Korea · Since 2021</span>
+      <h1>
+        AI diagnostics, content automation, and hardware engineering.
+        <span class="ko">피부·두피 진단 AI, 콘텐츠 자동화, 스마트 뷰티·헬스케어 하드웨어</span>
+      </h1>
+      <p class="lead">
+        HamanKorea is the business of Chulbum Jo, operating under the brand HamanGlobal.
+        We build CODEPOP — a mobile skin and scalp diagnostic solution driven by a Wi-Fi
+        microscope camera — alongside multilingual AI content pipelines and smart
+        beauty and healthcare devices.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#solutions">Our solutions</a>
+        <a class="btn ghost" href="mailto:contact@hamankorea.me">contact@hamankorea.me</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <p class="kicker">About <span style="color:var(--muted); font-weight:600; letter-spacing:0; text-transform:none">· 회사 소개</span></p>
+      <h2>One engineering team, three connected lines of work</h2>
+      <p class="sub">
+        HamanKorea (하만코리아) is an independent business registered in the Republic of Korea,
+        engaged in electrical and electronic engineering research and development, product design,
+        and device manufacturing. Our work is carried out end to end — hardware, firmware,
+        mobile applications, and the content systems around them — from our base in Asan,
+        Chungcheongnam-do.
+      </p>
+      <table class="facts">
+        <tr><th>Company</th><td>HamanKorea (하만코리아)</td></tr>
+        <tr><th>Brand</th><td>HamanGlobal (하만글로벌)</td></tr>
+        <tr><th>Representative</th><td>Chulbum Jo (조철범)</td></tr>
+        <tr><th>Business registration no.</th><td>203-12-96262</td></tr>
+        <tr><th>Established</th><td>24 December 2021</td></tr>
+        <tr><th>Focus</th><td>Electrical &amp; electronic R&amp;D · Product design · Device manufacturing · Mobile AI software · Content automation</td></tr>
+        <tr><th>Location</th><td>81 Asanvalleynam-ro, Dunpo-myeon, Asan-si, Chungcheongnam-do, 31406, Republic of Korea</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="solutions" class="alt">
+    <div class="wrap">
+      <p class="kicker">Solutions <span style="color:var(--muted); font-weight:600; letter-spacing:0; text-transform:none">· 주요 사업</span></p>
+      <h2>What we build</h2>
+      <p class="sub">Three lines of work share one engineering team: a diagnostic product line, an automation pipeline for multilingual media, and the hardware research that supports both.</p>
+
+      <div class="grid three">
+
+        <article class="card">
+          <span class="tag">Mobile AI · Diagnostics</span>
+          <h3>CODEPOP</h3>
+          <p class="ko-name">코드팝 — Wi-Fi 현미경 카메라 기반 모바일 피부·두피 진단 AI 솔루션</p>
+          <p>
+            CODEPOP connects a Wi-Fi microscope camera to a mobile app to capture
+            close-up skin and scalp imagery and support guided examination on a phone.
+          </p>
+          <ul>
+            <li>Wireless (Wi-Fi) microscope camera paired with the mobile app</li>
+            <li>Skin and scalp examination for everyday care</li>
+            <li>Officially launched in January 2024</li>
+            <li>Continuously developed on both iOS and Android</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="tag">AI · Media automation</span>
+          <h3>AI Content &amp; Media Automation</h3>
+          <p class="ko-name">다국어 뉴스 큐레이션 및 AI 숏폼·비디오 자동화 파이프라인</p>
+          <p>
+            A production pipeline that curates multilingual IT, automotive, and lifestyle
+            news and turns it into short-form and video content on a daily schedule.
+          </p>
+          <ul>
+            <li>Multilingual news curation and summarisation (IT, automotive, lifestyle)</li>
+            <li>AI short-form and video automation pipeline</li>
+            <li>Scheduled daily output across multiple formats</li>
+            <li>Applied in-house to our own publishing channels</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="tag">Hardware · R&amp;D</span>
+          <h3>Hardware &amp; Device R&amp;D</h3>
+          <p class="ko-name">전기·전자공학 연구개발, 제품 디자인 및 스마트 뷰티·헬스케어 기기</p>
+          <p>
+            Electrical and electronic engineering, product design, and manufacturing for
+            smart beauty and healthcare devices, including the HeadPop Focus line.
+          </p>
+          <ul>
+            <li>Electrical &amp; electronic engineering R&amp;D</li>
+            <li>Product design and device manufacturing</li>
+            <li>Smart beauty and healthcare devices (HeadPop Focus family)</li>
+            <li>Domestic and global distribution</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <p class="kicker">Contact <span style="color:var(--muted); font-weight:600; letter-spacing:0; text-transform:none">· 문의</span></p>
+      <h2>Get in touch</h2>
+      <p class="sub">For product, partnership, or business enquiries, please write to us. We reply in English and Korean.</p>
+
+      <div class="contact-grid">
+        <div class="card">
+          <ul class="contact-list">
+            <li><span>Email</span><a href="mailto:contact@hamankorea.me">contact@hamankorea.me</a></li>
+            <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/cb-j-0b436817b/" target="_blank" rel="noopener">linkedin.com/in/cb-j-0b436817b</a></li>
+            <li><span>Address</span>81 Asanvalleynam-ro, Dunpo-myeon,<br>Asan-si, Chungcheongnam-do, 31406,<br>Republic of Korea</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Business information</h3>
+          <p class="ko-name">사업자 정보</p>
+          <ul>
+            <li>HamanKorea (하만코리아) · HamanGlobal (하만글로벌)</li>
+            <li>Representative: Chulbum Jo (조철범)</li>
+            <li>Business registration no.: 203-12-96262</li>
+            <li>Established: 24 December 2021</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap row">
+    <div>
+      <p><strong style="color:var(--ink)">HamanKorea</strong> (하만코리아) · Brand: HamanGlobal (하만글로벌)</p>
+      <p>81 Asanvalleynam-ro, Dunpo-myeon, Asan-si, Chungcheongnam-do, 31406, Republic of Korea · <a href="mailto:contact@hamankorea.me">contact@hamankorea.me</a></p>
+    </div>
+    <div style="text-align:right">
+      <p>&copy; 2026 HamanKorea. All rights reserved.</p>
+      <p>Privacy: this site sets no cookies and runs no analytics or trackers. Enquiries are handled at contact@hamankorea.me.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

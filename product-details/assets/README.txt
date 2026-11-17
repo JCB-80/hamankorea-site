@@ -1,0 +1,1 @@
+Original product-detail image assets from Haman Korea's Wadiz campaigns 62542, 56162 and 220262. Images retain original bytes and animations; duplicate identical files are shared. Candidate work pending final integration. No changes to existing site assets.

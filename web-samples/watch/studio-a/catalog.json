@@ -1,0 +1,57 @@
+[
+  {
+    "id": "still",
+    "brand": "STILL",
+    "category": "마음챙김",
+    "path": "studio-a/still.html",
+    "description": "앱에서는 호흡 세션을 고르고, 손목에서는 시작과 멈춤에 집중하는 차분한 웰니스 디자인.",
+    "bg": "#e4e9e3",
+    "ink": "#30443b",
+    "accent": "#aac1a7",
+    "theme": "wellness"
+  },
+  {
+    "id": "folio",
+    "brand": "LEDGER",
+    "category": "소비 기록",
+    "path": "studio-a/folio.html",
+    "description": "샘플 생활 예산과 소비 카테고리를 앱과 워치에서 함께 탐색하는 절제된 금융 디자인.",
+    "bg": "#ede8dc",
+    "ink": "#272b2a",
+    "accent": "#e2a455",
+    "theme": "finance"
+  },
+  {
+    "id": "frame",
+    "brand": "FRAME / 08",
+    "category": "촬영 리모컨",
+    "path": "studio-a/frame.html",
+    "description": "필터와 셔터 상태가 작은 워치 화면까지 연결되는 가상 촬영 리모컨 콘셉트.",
+    "bg": "#e8e5e0",
+    "ink": "#242629",
+    "accent": "#d2bba1",
+    "theme": "camera"
+  },
+  {
+    "id": "lingo",
+    "brand": "LINGO",
+    "category": "언어 학습",
+    "path": "studio-a/lingo.html",
+    "description": "앱에서 학습 카드를 넘기고 손목에서 뜻을 확인하는 경쾌한 마이크로 러닝 디자인.",
+    "bg": "#e7e6f5",
+    "ink": "#332b57",
+    "accent": "#c3b3f2",
+    "theme": "learning"
+  },
+  {
+    "id": "pulsework",
+    "brand": "PULSE / WORK",
+    "category": "업무 흐름",
+    "path": "studio-a/pulsework.html",
+    "description": "작업 보드는 넓게, 지금 할 일은 간결하게. 상태를 바꿀 때마다 두 화면에 반영되는 업무 디자인.",
+    "bg": "#172126",
+    "ink": "#e9efea",
+    "accent": "#a8ddc3",
+    "theme": "work"
+  }
+]

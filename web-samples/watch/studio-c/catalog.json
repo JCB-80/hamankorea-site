@@ -1,0 +1,57 @@
+[
+  {
+    "id": "atelier",
+    "brand": "MADE / ATELIER",
+    "category": "공예 · 작업",
+    "title": "손끝에서 시작한\n하나의 완성.",
+    "bg": "#eee7dc",
+    "ink": "#37352f",
+    "accent": "#b66f4d",
+    "description": "작업 단계를 넘기면 앱과 워치에 다음 과정이 함께 표시됩니다.",
+    "path": "studio-c/atelier.html"
+  },
+  {
+    "id": "tide",
+    "brand": "TIDE CLUB",
+    "category": "해양 · 서핑",
+    "title": "물결의 리듬을\n손목 가까이.",
+    "bg": "#dcecef",
+    "ink": "#163c48",
+    "accent": "#2190a0",
+    "description": "파도 정보 카드와 워치의 세션 모드를 전환하는 가상 서핑 클럽.",
+    "path": "studio-c/tide.html"
+  },
+  {
+    "id": "museum",
+    "brand": "FIELD MUSEUM",
+    "category": "문화 · 전시",
+    "title": "작품과 나 사이,\n조용한 연결.",
+    "bg": "#f0eee7",
+    "ink": "#282623",
+    "accent": "#c6523e",
+    "description": "전시 작품을 선택하면 휴대폰 설명과 손목의 작품 번호가 함께 바뀝니다.",
+    "path": "studio-c/museum.html"
+  },
+  {
+    "id": "kitchen",
+    "brand": "SIMMER",
+    "category": "요리 · 타이머",
+    "title": "맛있는 시간의\n작은 차이.",
+    "bg": "#f5ead8",
+    "ink": "#4b362a",
+    "accent": "#e28447",
+    "description": "조리 단계를 선택하고 앱과 워치의 가상 타이머 상태를 함께 제어합니다.",
+    "path": "studio-c/kitchen.html"
+  },
+  {
+    "id": "commuter",
+    "brand": "LINE / DAILY",
+    "category": "일상 · 통근",
+    "title": "복잡한 아침을\n간결하게.",
+    "bg": "#e8ecea",
+    "ink": "#213f38",
+    "accent": "#c7e64b",
+    "description": "정류장을 넘기며 앱 노선도와 워치의 다음 정류장 안내를 비교합니다.",
+    "path": "studio-c/commuter.html"
+  }
+]

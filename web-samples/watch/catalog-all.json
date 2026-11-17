@@ -1,0 +1,222 @@
+[
+  {
+    "id": "stride",
+    "brand": "STRIDE",
+    "category": "피트니스",
+    "path": "stride.html",
+    "description": "휴대폰의 넓은 기록과 손목 위의 간결한 제어. 운동의 시작과 멈춤을 두 화면에서 함께 경험하세요.",
+    "bg": "#e9efdf",
+    "ink": "#263c27",
+    "accent": "#b9ef50",
+    "theme": "fitness"
+  },
+  {
+    "id": "tempo",
+    "brand": "TEMPO",
+    "category": "음악",
+    "path": "tempo.html",
+    "description": "감각적인 앨범 아트와 손목 위 플레이어. 재생 상태와 곡 선택이 앱과 워치에 동시에 반영됩니다.",
+    "bg": "#eee7f5",
+    "ink": "#352245",
+    "accent": "#be9cff",
+    "theme": "music"
+  },
+  {
+    "id": "daylight",
+    "brand": "DAYLIGHT",
+    "category": "일정 · 집중",
+    "path": "daylight.html",
+    "description": "하루의 흐름은 앱에서 넓게 보고, 다음 할 일은 워치에서 빠르게 확인하는 일정 디자인.",
+    "bg": "#f3ede0",
+    "ink": "#443b2e",
+    "accent": "#f3c66d",
+    "theme": "agenda"
+  },
+  {
+    "id": "roam",
+    "brand": "ROAM",
+    "category": "여행 · 이동",
+    "path": "roam.html",
+    "description": "휴대폰의 풍부한 여행 정보와 손목 위의 간결한 목적지 안내. 가상 여정을 직접 전환해 보세요.",
+    "bg": "#e4eef0",
+    "ink": "#203f4a",
+    "accent": "#65d3c4",
+    "theme": "travel"
+  },
+  {
+    "id": "nest",
+    "brand": "NEST",
+    "category": "스마트홈",
+    "path": "nest.html",
+    "description": "조명과 온도를 앱에서 세밀하게, 손목에서는 빠르게. 가상의 방 상태가 두 화면에 함께 표시됩니다.",
+    "bg": "#ebe5dd",
+    "ink": "#4d392d",
+    "accent": "#ecac78",
+    "theme": "home"
+  },
+  {
+    "id": "still",
+    "brand": "STILL",
+    "category": "마음챙김",
+    "path": "studio-a/still.html",
+    "description": "앱에서는 호흡 세션을 고르고, 손목에서는 시작과 멈춤에 집중하는 차분한 웰니스 디자인.",
+    "bg": "#e4e9e3",
+    "ink": "#30443b",
+    "accent": "#aac1a7",
+    "theme": "wellness"
+  },
+  {
+    "id": "folio",
+    "brand": "LEDGER",
+    "category": "소비 기록",
+    "path": "studio-a/folio.html",
+    "description": "샘플 생활 예산과 소비 카테고리를 앱과 워치에서 함께 탐색하는 절제된 금융 디자인.",
+    "bg": "#ede8dc",
+    "ink": "#272b2a",
+    "accent": "#e2a455",
+    "theme": "finance"
+  },
+  {
+    "id": "frame",
+    "brand": "FRAME / 08",
+    "category": "촬영 리모컨",
+    "path": "studio-a/frame.html",
+    "description": "필터와 셔터 상태가 작은 워치 화면까지 연결되는 가상 촬영 리모컨 콘셉트.",
+    "bg": "#e8e5e0",
+    "ink": "#242629",
+    "accent": "#d2bba1",
+    "theme": "camera"
+  },
+  {
+    "id": "lingo",
+    "brand": "LINGO",
+    "category": "언어 학습",
+    "path": "studio-a/lingo.html",
+    "description": "앱에서 학습 카드를 넘기고 손목에서 뜻을 확인하는 경쾌한 마이크로 러닝 디자인.",
+    "bg": "#e7e6f5",
+    "ink": "#332b57",
+    "accent": "#c3b3f2",
+    "theme": "learning"
+  },
+  {
+    "id": "pulsework",
+    "brand": "PULSE / WORK",
+    "category": "업무 흐름",
+    "path": "studio-a/pulsework.html",
+    "description": "작업 보드는 넓게, 지금 할 일은 간결하게. 상태를 바꿀 때마다 두 화면에 반영되는 업무 디자인.",
+    "bg": "#172126",
+    "ink": "#e9efea",
+    "accent": "#a8ddc3",
+    "theme": "work"
+  },
+  {
+    "id": "hotel",
+    "brand": "MAISON / 704",
+    "category": "호텔 · 스테이",
+    "path": "studio-b/hotel.html",
+    "description": "호텔의 고요한 서비스 경험. 객실의 휴식 모드를 앱과 손목에서 함께 전환합니다.",
+    "bg": "#e8e1d4",
+    "ink": "#37392c",
+    "accent": "#a5ad8a",
+    "theme": "hotel"
+  },
+  {
+    "id": "coffee",
+    "brand": "SLOW POUR",
+    "category": "커피 · 브루잉",
+    "path": "studio-b/coffee.html",
+    "description": "원두 선택과 추출 상태를 함께 보여주는 따뜻한 브루잉 도구 시안.",
+    "bg": "#e8d5ba",
+    "ink": "#4d2a1d",
+    "accent": "#e6ad5f",
+    "theme": "coffee"
+  },
+  {
+    "id": "reading",
+    "brand": "FOLIO",
+    "category": "독서 · 아카이브",
+    "path": "studio-b/reading.html",
+    "description": "페이지 넘기기와 책갈피가 동기화되는 활자 중심의 독서 경험.",
+    "bg": "#f1eee5",
+    "ink": "#242c32",
+    "accent": "#e9cf64",
+    "theme": "reading"
+  },
+  {
+    "id": "cycling",
+    "brand": "VELO / ONE",
+    "category": "사이클링 · 모빌리티",
+    "path": "studio-b/cycling.html",
+    "description": "주행 모드와 보조 단계를 조절하는 역동적인 사이클링 대시보드.",
+    "bg": "#131d27",
+    "ink": "#ebf1ed",
+    "accent": "#c7ff4f",
+    "theme": "cycling"
+  },
+  {
+    "id": "garden",
+    "brand": "MOSS & MORNING",
+    "category": "식물 · 라이프",
+    "path": "studio-b/garden.html",
+    "description": "식물 선택과 물주기 기록이 앱과 워치에 함께 표시되는 작은 정원.",
+    "bg": "#e2e8d9",
+    "ink": "#27432f",
+    "accent": "#c1d59b",
+    "theme": "garden"
+  },
+  {
+    "id": "atelier",
+    "brand": "MADE / ATELIER",
+    "category": "공예 · 작업",
+    "path": "studio-c/atelier.html",
+    "description": "작업 단계를 넘기면 앱과 워치에 다음 과정이 함께 표시됩니다.",
+    "bg": "#eee7dc",
+    "ink": "#37352f",
+    "accent": "#b66f4d",
+    "theme": "atelier"
+  },
+  {
+    "id": "tide",
+    "brand": "TIDE CLUB",
+    "category": "해양 · 서핑",
+    "path": "studio-c/tide.html",
+    "description": "파도 정보 카드와 워치의 세션 모드를 전환하는 가상 서핑 클럽.",
+    "bg": "#dcecef",
+    "ink": "#163c48",
+    "accent": "#2190a0",
+    "theme": "tide"
+  },
+  {
+    "id": "museum",
+    "brand": "FIELD MUSEUM",
+    "category": "문화 · 전시",
+    "path": "studio-c/museum.html",
+    "description": "전시 작품을 선택하면 휴대폰 설명과 손목의 작품 번호가 함께 바뀝니다.",
+    "bg": "#f0eee7",
+    "ink": "#282623",
+    "accent": "#c6523e",
+    "theme": "museum"
+  },
+  {
+    "id": "kitchen",
+    "brand": "SIMMER",
+    "category": "요리 · 타이머",
+    "path": "studio-c/kitchen.html",
+    "description": "조리 단계를 선택하고 앱과 워치의 가상 타이머 상태를 함께 제어합니다.",
+    "bg": "#f5ead8",
+    "ink": "#4b362a",
+    "accent": "#e28447",
+    "theme": "kitchen"
+  },
+  {
+    "id": "commuter",
+    "brand": "LINE / DAILY",
+    "category": "일상 · 통근",
+    "path": "studio-c/commuter.html",
+    "description": "정류장을 넘기며 앱 노선도와 워치의 다음 정류장 안내를 비교합니다.",
+    "bg": "#e8ecea",
+    "ink": "#213f38",
+    "accent": "#c7e64b",
+    "theme": "commuter"
+  }
+]

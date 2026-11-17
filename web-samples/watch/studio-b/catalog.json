@@ -1,0 +1,67 @@
+[
+  {
+    "id": "hotel",
+    "name": "MAISON / 704",
+    "brand": "MAISON / 704",
+    "category": "호텔 · 스테이",
+    "description": "호텔의 고요한 서비스 경험. 객실의 휴식 모드를 앱과 손목에서 함께 전환합니다.",
+    "bg": "#e8e1d4",
+    "ink": "#37392c",
+    "accent": "#a5ad8a",
+    "title": "머무는 시간의\n새로운 품격.",
+    "en": "THE ART OF STAYING",
+    "path": "studio-b/hotel.html"
+  },
+  {
+    "id": "coffee",
+    "name": "SLOW POUR",
+    "brand": "SLOW POUR",
+    "category": "커피 · 브루잉",
+    "description": "원두 선택과 추출 상태를 함께 보여주는 따뜻한 브루잉 도구 시안.",
+    "bg": "#e8d5ba",
+    "ink": "#4d2a1d",
+    "accent": "#e6ad5f",
+    "title": "한 잔의 속도로,\n하루를 시작해요.",
+    "en": "BREW A BETTER MOMENT",
+    "path": "studio-b/coffee.html"
+  },
+  {
+    "id": "reading",
+    "name": "FOLIO",
+    "brand": "FOLIO",
+    "category": "독서 · 아카이브",
+    "description": "페이지 넘기기와 책갈피가 동기화되는 활자 중심의 독서 경험.",
+    "bg": "#f1eee5",
+    "ink": "#242c32",
+    "accent": "#e9cf64",
+    "title": "문장과 문장 사이,\n나를 위한 여백.",
+    "en": "ONE PAGE AT A TIME",
+    "path": "studio-b/reading.html"
+  },
+  {
+    "id": "cycling",
+    "name": "VELO / ONE",
+    "brand": "VELO / ONE",
+    "category": "사이클링 · 모빌리티",
+    "description": "주행 모드와 보조 단계를 조절하는 역동적인 사이클링 대시보드.",
+    "bg": "#131d27",
+    "ink": "#ebf1ed",
+    "accent": "#c7ff4f",
+    "title": "오늘의 길을\n다르게 달리다.",
+    "en": "FIND YOUR OWN PACE",
+    "path": "studio-b/cycling.html"
+  },
+  {
+    "id": "garden",
+    "name": "MOSS & MORNING",
+    "brand": "MOSS & MORNING",
+    "category": "식물 · 라이프",
+    "description": "식물 선택과 물주기 기록이 앱과 워치에 함께 표시되는 작은 정원.",
+    "bg": "#e2e8d9",
+    "ink": "#27432f",
+    "accent": "#c1d59b",
+    "title": "자라는 기쁨을\n곁에 두세요.",
+    "en": "GROW A LITTLE EVERY DAY",
+    "path": "studio-b/garden.html"
+  }
+]

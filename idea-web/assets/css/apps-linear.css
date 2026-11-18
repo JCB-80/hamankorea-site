@@ -1,0 +1,359 @@
+/* 추가 앱 스타일 — 리니어 보드 */
+.linear-lab {
+  gap: 12px;
+}
+
+.linear-shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: 156px minmax(0, 1fr);
+  min-height: 540px;
+  background: var(--board);
+  color: var(--board-text);
+  border: 1px solid var(--board-line);
+  overflow: hidden;
+}
+
+.linear-shell :focus-visible {
+  outline-color: var(--board-text);
+}
+
+.linear-side {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 16px 12px;
+  background: var(--board-2);
+  border-right: 1px solid var(--board-line);
+}
+
+.linear-logo {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--board-text);
+}
+
+.linear-nav {
+  display: grid;
+  gap: 2px;
+}
+
+.linear-nav-item {
+  padding: 6px 8px;
+  border-radius: 2px;
+  font-size: 0.78rem;
+  color: var(--board-muted);
+}
+
+.linear-nav-item.is-active {
+  background: var(--board-select);
+  color: var(--board-text);
+}
+
+.linear-side-note {
+  margin-top: auto;
+  padding: 4px 6px;
+  border: 1px solid var(--board-line);
+  text-align: center;
+  font-size: 0.64rem;
+  color: var(--board-muted);
+}
+
+.linear-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.linear-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--board-line);
+  flex-wrap: wrap;
+}
+
+.linear-heading {
+  font-size: 0.92rem;
+  letter-spacing: -0.01em;
+}
+
+.linear-head .mono {
+  color: var(--board-muted);
+  font-size: 0.64rem;
+}
+
+.linear-spacer {
+  flex: 1;
+}
+
+.linear-search {
+  width: min(180px, 42vw);
+  padding: 5px 8px;
+  border: 1px solid var(--board-line);
+  border-radius: 2px;
+  background: var(--board-2);
+  color: var(--board-text);
+  font-size: 0.74rem;
+}
+
+.linear-search::placeholder {
+  color: var(--board-muted);
+}
+
+.linear-kbd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border: 1px solid var(--board-line);
+  border-radius: 2px;
+  color: var(--board-muted);
+  font-size: 0.7rem;
+}
+
+.linear-kbd-btn:hover {
+  border-color: var(--board-muted);
+  color: var(--board-text);
+}
+
+.linear-list {
+  flex: 1;
+  display: grid;
+  align-content: start;
+  gap: 1px;
+  padding: 6px;
+  min-height: 320px;
+  overflow: auto;
+}
+
+.linear-row {
+  display: grid;
+  grid-template-columns: 12px 58px minmax(0, 1fr) 40px 24px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 2px;
+  text-align: left;
+  color: var(--board-muted);
+  font-size: 0.78rem;
+  transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+
+.linear-row:hover {
+  background: var(--board-2);
+}
+
+.linear-row.is-selected {
+  background: var(--board-select);
+  color: var(--board-text);
+  box-shadow: inset 2px 0 0 var(--signal);
+}
+
+.linear-dot {
+  width: 8px;
+  height: 8px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.linear-dot.is-done {
+  background: var(--board-done);
+  border-color: var(--board-done);
+}
+
+.linear-dot.is-doing {
+  background: var(--board-doing);
+  border-color: var(--board-doing);
+}
+
+.linear-dot.is-backlog {
+  border-color: var(--board-backlog);
+}
+
+.linear-id {
+  font-size: 0.62rem;
+  color: var(--board-muted);
+}
+
+.linear-title {
+  color: var(--board-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.linear-priority {
+  font-size: 0.64rem;
+  color: var(--board-muted);
+  text-align: right;
+}
+
+.linear-who {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--board-chip);
+  color: var(--board-text);
+  font-size: 0.66rem;
+}
+
+.linear-empty {
+  padding: 26px 12px;
+  text-align: center;
+  color: var(--board-muted);
+  font-size: 0.78rem;
+}
+
+.linear-compose {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.linear-new {
+  display: flex;
+  gap: 6px;
+}
+
+.linear-new-input {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 9px;
+  border: 1px solid var(--board-line);
+  border-radius: 2px;
+  background: var(--board-2);
+  color: var(--board-text);
+  font-size: 0.8rem;
+}
+
+.linear-new-input::placeholder {
+  color: var(--board-muted);
+}
+
+.linear-new-submit {
+  padding: 0 11px;
+  border-radius: 2px;
+  background: var(--signal);
+  color: var(--paper-raised);
+  font-size: 0.74rem;
+}
+
+.linear-new-cancel {
+  padding: 0 8px;
+  color: var(--board-muted);
+  font-size: 0.72rem;
+}
+
+.linear-new-cancel:hover {
+  color: var(--board-text);
+}
+
+.linear-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 14px;
+  border-top: 1px solid var(--board-line);
+  color: var(--board-muted);
+  font-size: 0.62rem;
+  flex-wrap: wrap;
+}
+
+.linear-cmd {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  padding-top: 10vh;
+  background: color-mix(in srgb, var(--board) 78%, transparent);
+  backdrop-filter: blur(2px);
+}
+
+.linear-cmd[hidden] {
+  display: none;
+}
+
+.linear-cmd-panel {
+  width: min(460px, calc(100% - 24px));
+  background: var(--board-2);
+  border: 1px solid var(--board-line);
+  box-shadow: 10px 12px 0 rgb(0 0 0 / 0.35);
+  overflow: hidden;
+  animation: palette-in var(--mid) var(--ease);
+}
+
+.linear-cmd-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--board-line);
+  background: transparent;
+  color: var(--board-text);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.linear-cmd-input::placeholder {
+  color: var(--board-muted);
+}
+
+.linear-cmd-list {
+  max-height: 250px;
+  overflow: auto;
+  padding: 6px;
+}
+
+.linear-cmd-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 2px;
+  color: var(--board-text);
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.linear-cmd-row:hover,
+.linear-cmd-row.is-selected {
+  background: var(--board-select);
+}
+
+.linear-cmd-hint {
+  color: var(--board-muted);
+  font-size: 0.66rem;
+}
+
+.linear-cmd-foot {
+  padding: 7px 12px;
+  border-top: 1px solid var(--board-line);
+  color: var(--board-muted);
+  font-size: 0.62rem;
+}
+
+@media (max-width: 720px) {
+  .linear-shell {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 500px;
+  }
+
+  .linear-side {
+    display: none;
+  }
+
+  .linear-row {
+    grid-template-columns: 12px 50px minmax(0, 1fr) 22px;
+  }
+
+  .linear-priority {
+    display: none;
+  }
+}

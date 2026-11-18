@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>아이디어웹 | 23가지 인터랙티브 웹 체험</title>
+    <meta
+      name="description"
+      content="영상에서 소개한 신박한 웹사이트 19곳과 번외 4곳의 기능을 브라우저에서 직접 체험할 수 있게 다시 만든 티어표."
+    />
+    <meta name="theme-color" content="#f2ede2" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f2ede2'/%3E%3Crect x='4' y='4' width='24' height='6' fill='%23d8402a'/%3E%3Crect x='4' y='13' width='24' height='6' fill='%2317140e'/%3E%3Crect x='4' y='22' width='24' height='6' fill='%2322625d'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/css/apps.css" />
+    <link rel="stylesheet" href="assets/css/apps-linear.css" />
+    <link rel="stylesheet" href="assets/css/apps-rest.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+    <header class="site-head">
+      <div class="wrap head-inner">
+        <a class="brand" href="#/" aria-label="아이디어웹 홈">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          아이디어웹
+          <span class="brand-sub">IDEA WEB</span>
+        </a>
+        <nav class="site-nav" aria-label="주요 메뉴">
+          <a href="/">하만코리아</a>
+          <a href="#table">티어표</a>
+          <a href="#notes">제작 노트</a>
+          <a href="#how">실행 안내</a>
+        </nav>
+        <div class="head-actions">
+          <button class="kbd-btn" type="button" data-open-palette aria-haspopup="dialog">
+            사이트 찾기
+            <span class="kbd" aria-hidden="true">⌘K</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="view" id="home">
+        <section class="hero wrap" aria-labelledby="hero-title">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <h1 class="hero-title" id="hero-title">
+                <span class="line">직접 만져보는</span>
+                <span class="line">신박한 웹 <em>19</em></span>
+              </h1>
+              <p class="hero-lede">
+                영상에서 소개한 19곳에 번외 4곳을 더해, 23곳의 기능을 브라우저에서
+                그대로 체험할 수 있게 다시 만들었습니다.
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn--primary" type="button" data-random>무작위로 한 곳</button>
+                <a class="btn" href="#table">티어표 보기</a>
+              </div>
+              <p class="hero-note">
+                <span class="kbd">⌘K</span> 또는 <span class="kbd">Ctrl K</span> 로 어디든 바로
+                열 수 있습니다.
+              </p>
+            </div>
+            <div class="hero-figure">
+              <div class="mini-table" id="mini-table" aria-label="티어표 요약"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="table-section wrap" id="table" aria-labelledby="table-title">
+          <div class="section-head">
+            <div class="stack" style="gap: 6px">
+              <h2 id="table-title">티어표</h2>
+              <p>영상의 기준은 하나, “바이브코딩할 때 참고하고 싶은 정도”.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn--sm" type="button" data-random>무작위 체험</button>
+              <button class="btn btn--sm btn--ghost" type="button" data-open-palette>
+                이름으로 찾기
+              </button>
+            </div>
+          </div>
+          <div id="tiers"></div>
+        </section>
+
+        <section class="notes wrap" id="notes" aria-labelledby="notes-title">
+          <div class="notes-grid">
+            <h2 class="notes-title" id="notes-title">제작<br />노트</h2>
+            <ol class="notes-list">
+              <li class="note">
+                <span class="note-no" aria-hidden="true">01</span>
+                <div>
+                  <h3>아이디어와 동작만 가져왔습니다</h3>
+                  <p>
+                    로고, 화면 디자인, 사이트에 적힌 문구는 원본 회사의 것입니다. 이 페이지는
+                    같은 기능을 새로 구현한 오마주이며, 원본과 연결되거나 제휴된 페이지가
+                    아닙니다.
+                  </p>
+                </div>
+              </li>
+              <li class="note">
+                <span class="note-no" aria-hidden="true">02</span>
+                <div>
+                  <h3>설치도, 서버도, 계정도 필요 없습니다</h3>
+                  <p>
+                    모두 브라우저에서 도는 정적 페이지입니다. 데이터는 서버로 보내지 않고,
+                    기록이 필요한 곳은 브라우저 저장소에만 남깁니다.
+                  </p>
+                </div>
+              </li>
+              <li class="note">
+                <span class="note-no" aria-hidden="true">03</span>
+                <div>
+                  <h3>원본이 AI를 쓰는 곳은 간이 모델로</h3>
+                  <p>
+                    꼬맨틀의 유사도, 인피니트 크래프트의 조합, 퀵 드로우의 필기 인식은
+                    브라우저에서 도는 작은 규칙·모델로 대신했습니다. 원본과 결과가 정확히
+                    같지는 않습니다.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="notes wrap" id="how" aria-labelledby="how-title">
+          <div class="notes-grid">
+            <h2 class="notes-title" id="how-title">실행<br />안내</h2>
+            <ol class="notes-list">
+              <li class="note">
+                <span class="note-no" aria-hidden="true">01</span>
+                <div>
+                  <h3>바로 체험하기</h3><p>티어표에서 원하는 웹 체험을 선택하세요. 설치나 회원가입 없이 브라우저에서 사용할 수 있습니다.</p>
+                </div>
+              </li>
+              <li class="note">
+                <span class="note-no" aria-hidden="true">02</span>
+                <div>
+                  <h3>브라우저에만 저장</h3><p>일부 기록은 현재 브라우저에만 저장됩니다. 결제·비밀번호 화면은 데모이므로 실제 개인정보나 결제정보를 입력하지 마세요.</p>
+                </div>
+              </li>
+              <li class="note">
+                <span class="note-no" aria-hidden="true">03</span>
+                <div>
+                  <h3>바로 가기</h3>
+                  <p>
+                    <span class="kbd">⌘K</span> 로 검색, <span class="kbd">Esc</span> 로 닫기.
+                    주소 끝에 <code>#/a/pointer</code> 처럼 앱 이름을 붙이면 바로 열립니다.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </section>
+      </div>
+
+      <div class="workbench wrap view" id="app" hidden></div>
+
+      <noscript>
+        <section class="wrap" style="padding: 24px 0 64px">
+          <h2 class="display" style="font-size: 2rem; margin-bottom: 12px">자바스크립트가 필요합니다</h2>
+          <p class="hint">
+            이 페이지의 체험은 모두 브라우저 자바스크립트로 동작합니다. 자바스크립트를 켜면
+            포인터 포인터, 스펜드 빌 게이츠 머니, 더 패스워드 게임 등 23곳을 바로 만져볼 수
+            있습니다.
+          </p>
+        </section>
+      </noscript>
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap foot-inner">
+        <p>
+          아이디어웹은 혼잡스의 영상 「신박한 웹사이트 티어표」에서 소개된 사이트들의 아이디어를
+          참고해 만든 개인 프로젝트입니다. 원본 사이트와 제휴 관계가 없으며, 상표와 디자인은
+          각 소유자에게 있습니다.
+        </p>
+        <div class="foot-meta">
+          <span class="mono">IDEA WEB / 2026</span>
+          <a href="/">하만코리아로 돌아가기</a>
+        </div>
+      </div>
+    </footer>
+
+    <div class="palette" id="palette" hidden>
+      <div class="palette-panel" role="dialog" aria-modal="true" aria-labelledby="palette-title">
+        <h2 class="sr-only" id="palette-title">사이트 찾기</h2>
+        <div class="palette-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m16.5 16.5 4 4"></path>
+          </svg>
+          <input
+            id="palette-input"
+            type="text"
+            placeholder="사이트 이름이나 기능으로 찾기"
+            autocomplete="off"
+            spellcheck="false"
+            aria-controls="palette-list"
+            aria-autocomplete="list"
+          />
+          <span class="kbd" aria-hidden="true">ESC</span>
+        </div>
+        <div class="palette-list" id="palette-list" role="listbox" aria-labelledby="palette-title"></div>
+        <div class="palette-foot">
+          <span><span class="kbd">↑</span><span class="kbd">↓</span> 이동</span>
+          <span><span class="kbd">Enter</span> 열기</span>
+          <span><span class="kbd">Esc</span> 닫기</span>
+          <span>23곳</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/registry.js"></script>
+    <script src="assets/js/apps/linear.js"></script>
+    <script src="assets/js/apps/noonnu.js"></script>
+    <script src="assets/js/apps/squishy.js"></script>
+    <script src="assets/js/apps/colors.js"></script>
+    <script src="assets/js/apps/wheel.js"></script>
+    <script src="assets/js/apps/craft.js"></script>
+    <script src="assets/js/apps/stripe.js"></script>
+    <script src="assets/js/apps/undraw.js"></script>
+    <script src="assets/js/apps/when2meet.js"></script>
+    <script src="assets/js/apps/ktest.js"></script>
+    <script src="assets/js/apps/billgates.js"></script>
+    <script src="assets/js/apps/quickdraw.js"></script>
+    <script src="assets/js/apps/kkomanul.js"></script>
+    <script src="assets/js/apps/pixel.js"></script>
+    <script src="assets/js/apps/password.js"></script>
+    <script src="assets/js/apps/deepsea.js"></script>
+    <script src="assets/js/apps/excalidraw.js"></script>
+    <script src="assets/js/apps/pointer.js"></script>
+    <script src="assets/js/apps/bruno.js"></script>
+    <script src="assets/js/apps/ohouse.js"></script>
+    <script src="assets/js/apps/duolingo.js"></script>
+    <script src="assets/js/apps/toss.js"></script>
+    <script src="assets/js/apps/airpods.js"></script>
+    <script src="assets/js/palette.js"></script>
+    <script src="assets/js/shell.js"></script>
+  </body>
+</html>

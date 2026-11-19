@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ko" data-view="landing">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>도면: 의뢰자와 개발자가 같은 도면을 보는 견적 와이어프레임</title>
+<meta name="description" content="백지 대신 업종별 블록. 기능을 체크하면 예상 공수와 잠글 수 있는 명세서 링크가 바로 생성됩니다. 가입 없이 링크로만 공유합니다.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f2efe9'/%3E%3Cpath d='M7 9h18M7 16h18M7 23h18M11 7v18M21 7v18' stroke='%23b6afa0' stroke-width='1.4'/%3E%3Crect x='13' y='11' width='7' height='5' rx='1' fill='%23bd3f28'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<!-- ═══════════════ 랜딩 ═══════════════ -->
+<header class="site-head" id="siteHead">
+  <div class="wrap site-head-in">
+    <a class="mark" href="#/" aria-label="도면 홈">
+      <span class="mark-square" aria-hidden="true"></span>
+      <span class="mark-name">도면</span>
+    </a>
+    <nav class="site-nav" aria-label="안내">
+      <a href="#how">작동 방식</a>
+      <a href="#compare">비교</a>
+      <a href="#schema">명세 구조</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="#/build">무가입으로 시작</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero wrap" aria-labelledby="heroTitle">
+    <div class="hero-copy">
+      <h1 class="hero-title" id="heroTitle">백지 위에<br>그리지 않습니다.</h1>
+      <p class="hero-line">업종 템플릿을 고르고 기능을 체크하면, 예상 공수와 잠글 수 있는 명세서 링크가 바로 나옵니다.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#/build">업종 템플릿으로 시작</a>
+        <a class="btn btn-quiet" href="#how">작동 방식 보기</a>
+      </div>
+      <p class="hero-note">회원가입 없이 시작하고, 완료된 도면은 링크로만 공유합니다.</p>
+    </div>
+
+    <figure class="demo" id="demo" aria-label="도면 편집기에서 블록을 고르고 기능을 체크하는 예시">
+      <div class="demo-bar">
+        <span class="demo-tag">12 컬럼 · 행 40px 격자</span>
+        <span class="demo-tag demo-tag-end" id="demoLevel">선택 L1</span>
+      </div>
+      <div class="demo-canvas" id="demoCanvas">
+        <button class="demo-block" type="button" data-b="hero" style="grid-column: span 12" aria-pressed="true">
+          <span class="demo-block-name">상단 버튼 / 배너</span>
+          <span class="demo-chip">L1</span>
+        </button>
+        <button class="demo-block" type="button" data-b="booking" style="grid-column: span 6" aria-pressed="false">
+          <span class="demo-block-name">일정·예약</span>
+          <span class="demo-chip demo-chip-hi">L3</span>
+        </button>
+        <button class="demo-block" type="button" data-b="contact" style="grid-column: span 6" aria-pressed="false">
+          <span class="demo-block-name">문의하기</span>
+          <span class="demo-chip">L2</span>
+        </button>
+        <button class="demo-block" type="button" data-b="board" style="grid-column: span 12" aria-pressed="false">
+          <span class="demo-block-name">목록·게시판</span>
+          <span class="demo-chip">L2</span>
+        </button>
+      </div>
+      <div class="demo-options" id="demoOptions">
+        <span class="chip is-on">외부 링크</span>
+        <span class="chip is-on">전화 연결</span>
+        <span class="chip">섹션 스크롤</span>
+      </div>
+      <div class="demo-out">
+        <p class="demo-spec" id="demoSpec">지정한 주소로 이동하고, 모바일에서 전화 앱으로 연결되는 배너.</p>
+        <p class="demo-cost"><strong id="demoCost">미산출</strong> 인·일 <span class="demo-cost-note">설계 기준 추정</span></p>
+      </div>
+    </figure>
+  </section>
+
+  <section class="band" id="templates" aria-labelledby="tplTitle">
+    <div class="wrap">
+      <h2 class="sec-title" id="tplTitle">여섯 개의 업종 뼈대</h2>
+      <p class="sec-line">빈 캔버스 대신, 이미 짜인 순서에서 시작합니다. 블록은 언제든 지우고 늘릴 수 있습니다.</p>
+      <ul class="tpl-grid" id="tplGrid">
+        <li><a class="tpl" href="#/build?t=clinic"><span class="tpl-name">병원·예약형</span><span class="tpl-meta">예약 모듈 포함 · 6 블록</span></a></li>
+        <li><a class="tpl" href="#/build?t=company"><span class="tpl-name">회사 소개형</span><span class="tpl-meta">조직·실적 중심 · 6 블록</span></a></li>
+        <li><a class="tpl" href="#/build?t=shop"><span class="tpl-name">쇼핑몰·상품형</span><span class="tpl-meta">가격표·결제 · 6 블록</span></a></li>
+        <li><a class="tpl" href="#/build?t=academy"><span class="tpl-name">학원·교육형</span><span class="tpl-meta">커리큘럼·수강료 · 6 블록</span></a></li>
+        <li><a class="tpl" href="#/build?t=cafe"><span class="tpl-name">카페·매장형</span><span class="tpl-meta">사진·오시는 길 · 5 블록</span></a></li>
+        <li><a class="tpl" href="#/build?t=studio"><span class="tpl-name">1인 사업·포트폴리오</span><span class="tpl-meta">작업물·문의 · 5 블록</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band band-alt" id="how" aria-labelledby="howTitle">
+    <div class="wrap">
+      <h2 class="sec-title" id="howTitle">세 단계면 견적이 됩니다</h2>
+      <ol class="steps-list">
+        <li class="step-row">
+          <div class="step-body">
+            <h3>블록 배치</h3>
+            <p>모서리를 끌어 폭과 높이를 12컬럼 격자에 맞춥니다. 제목만 한국어로 고쳐 쓰면 배치는 끝입니다.</p>
+          </div>
+          <span class="step-key">12컬럼 스냅 · 행 높이 격자</span>
+        </li>
+        <li class="step-row">
+          <div class="step-body">
+            <h3>기능 옵션 태깅</h3>
+            <p>버튼과 영역을 누르면 그 자리에서 체크리스트가 열립니다. 체크할 때마다 개발 등급과 명세 문구가 함께 확정됩니다.</p>
+          </div>
+          <span class="step-key">PC·모바일 전환 뷰</span>
+        </li>
+        <li class="step-row">
+          <div class="step-body">
+            <h3>합의본 잠금</h3>
+            <p>합의된 시점의 도면을 해시로 고정해 읽기 전용 링크와 명세서를 발급합니다. 이후 수정은 잠금본과 다른 블록만 표시됩니다.</p>
+          </div>
+          <span class="step-key">버전 잠금 · 변경 비교</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="compare" aria-labelledby="cmpTitle">
+    <div class="wrap">
+      <h2 class="sec-title" id="cmpTitle">네 도구에서 가져오고, 버린 것</h2>
+      <p class="sec-line">기존 도구는 내부 기획자에 맞춰져 있습니다. 견적 상담에 필요한 부분만 남겼습니다.</p>
+      <div class="tbl-scroll">
+        <table class="cmp">
+          <caption class="sr-only">와이어프레임 도구별로 가져온 UX와 버린 부분</caption>
+          <thead>
+            <tr><th scope="col">도구</th><th scope="col">가져온 것</th><th scope="col">버린 것</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Wireframe.cc</th><td data-label="가져온 것">비율 추천, 무채색+1색, 무가입 URL 공유</td><td data-label="버린 것">백지에서 시작하는 방식과 1페이지 제한</td></tr>
+            <tr><th scope="row">Excalidraw</th><td data-label="가져온 것">가입 없는 즉시 시작, 링크 기반 공동 편집</td><td data-label="버린 것">도형·선 중심 캔버스. 기능 범위가 드러나지 않습니다</td></tr>
+            <tr><th scope="row">Miro</th><td data-label="가져온 것">한국어 UI, 블록별 댓글 스레드</td><td data-label="버린 것">방대한 기능 목록과 견적 산출의 단절</td></tr>
+            <tr><th scope="row">Balsamiq</th><td data-label="가져온 것">UI 부품을 끌어다 조립하는 방식</td><td data-label="버린 것">영문 중심 모델과 약한 반응형 미리보기</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-alt" id="schema" aria-labelledby="schTitle">
+    <div class="wrap sch-wrap">
+      <div class="sch-copy">
+        <h2 class="sec-title" id="schTitle">화면이 곧 명세입니다</h2>
+        <p class="sec-line">모든 블록은 하나의 JSON 레코드로 저장됩니다. 같은 데이터가 캔버스를 그리고, 견적을 계산하고, 명세서를 인쇄합니다.</p>
+        <ul class="spec-list">
+          <li><strong>12컬럼 스냅</strong> 자유 좌표 없이 컬럼과 행 단위로만 움직입니다.</li>
+          <li><strong>블록-옵션 스키마</strong> 기능 옵션이 개발 등급과 함께 저장됩니다.</li>
+          <li><strong>무가입 링크</strong> 링크 하나로 열리고, 블록마다 핀을 꽂아 묻고 답합니다.</li>
+          <li><strong>스냅샷 잠금</strong> 합의 시점의 JSON을 해시로 고정합니다.</li>
+          <li><strong>페이지 분할</strong> 페이지마다 도면과 명세를 나눠 한 장에 몰아넣지 않습니다.</li>
+        </ul>
+      </div>
+      <pre class="code" aria-label="블록 레코드 예시"><code>{
+  "id": "blk_4f1c",
+  "type": "booking",
+  "label": "진료 예약",
+  "gridSpan": 6,
+  "colStart": 1,
+  "rows": 4,
+  "featureLevel": 3,
+  "options": ["date", "capacity"]
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="wrap foot-in">
+      <div class="foot-brand">
+        <span class="mark-name">도면</span>
+        <p>의뢰자와 개발자가 같은 도면을 보는 견적 와이어프레임.</p>
+      </div>
+      <div class="foot-col">
+        <h2 class="foot-h">참고 자료</h2>
+        <ul>
+          <li><a href="https://wireframe.cc/docs/" target="_blank" rel="noreferrer noopener">Wireframe.cc 문서</a></li>
+          <li><a href="https://excalidraw.com/" target="_blank" rel="noreferrer noopener">Excalidraw</a></li>
+          <li><a href="https://miro.com/ko/wireframe/" target="_blank" rel="noreferrer noopener">Miro 와이어프레임</a></li>
+          <li><a href="https://balsamiq.com/product/" target="_blank" rel="noreferrer noopener">Balsamiq</a></li>
+          <li><a href="https://www.wishket.com/" target="_blank" rel="noreferrer noopener">위시켓</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h2 class="foot-h">알아두실 점</h2>
+        <p class="foot-note">예상 공수는 워크플로우 설계 기준 추정치이며 확정 견적이 아닙니다. 작업 내용은 이 브라우저에만 저장되고 서버로 전송되지 않습니다.</p>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<!-- ═══════════════ 편집기 ═══════════════ -->
+<section class="builder" id="builder" hidden aria-label="도면 편집기">
+  <header class="builder-head">
+    <a class="mark mark-sm" href="#/" aria-label="도면 홈으로">
+      <span class="mark-square" aria-hidden="true"></span>
+      <span class="mark-name">도면</span>
+    </a>
+
+    <div class="doc-name">
+      <label class="sr-only" for="docName">도면 이름</label>
+      <input id="docName" class="doc-name-in" value="이름 없는 도면" autocomplete="off" spellcheck="false">
+      <span class="doc-name-meta" id="docMeta"><span>블록 0개</span></span>
+    </div>
+
+    <nav class="step-nav" aria-label="작업 단계">
+      <button class="step-btn" type="button" data-step="1"><span class="step-btn-n">1</span> 블록 배치</button>
+      <button class="step-btn" type="button" data-step="2"><span class="step-btn-n">2</span> 기능 옵션</button>
+      <button class="step-btn" type="button" data-step="3"><span class="step-btn-n">3</span> 잠금·공유</button>
+    </nav>
+
+    <div class="head-end">
+      <span class="ro-badge" id="roBadge" hidden>읽기 전용</span>
+      <button class="est-chip" type="button" id="estChip" aria-describedby="estChipNote">
+        <span class="est-chip-l">예상 공수</span>
+        <span class="est-chip-v" id="estChipValue">0.0 인·일</span>
+      </button>
+      <span class="sr-only" id="estChipNote">설계 기준 추정치입니다</span>
+      <button class="btn btn-quiet btn-sm" type="button" id="btnReset">새 도면</button>
+      <button class="btn btn-primary btn-sm" type="button" id="btnShare2">공유</button>
+    </div>
+  </header>
+
+  <div class="builder-body">
+    <aside class="palette" id="palette" aria-label="블록 팔레트">
+      <div class="palette-head">
+        <div class="palette-title">
+          <h2 class="rail-h">블록 추가</h2>
+          <button class="icon-btn" type="button" id="paletteClose" aria-label="팔레트 접기">✕</button>
+        </div>
+      </div>
+      <div class="palette-scroll" id="paletteList"></div>
+      <div class="palette-foot">
+        <button class="btn btn-quiet btn-sm btn-block" type="button" id="btnAutoPack">자동 정렬</button>
+      </div>
+    </aside>
+
+    <div class="stage">
+      <div class="stage-bar">
+        <button class="icon-btn" type="button" id="paletteOpen" aria-label="팔레트 열기" hidden>＋</button>
+        <div class="seg" role="group" aria-label="화면 폭 미리보기">
+          <button class="seg-btn is-on" type="button" data-view-w="pc" aria-pressed="true">PC</button>
+          <button class="seg-btn" type="button" data-view-w="mo" aria-pressed="false">모바일</button>
+        </div>
+        <span class="stage-hint" id="stageHint">12 컬럼 격자 · 행 40px 스냅</span>
+        <div class="stage-end">
+          <button class="icon-btn" type="button" id="btnUndo" aria-label="되돌리기">↺</button>
+          <button class="icon-btn" type="button" id="btnRedo" aria-label="다시 실행">↻</button>
+        </div>
+      </div>
+      <div class="page-bar" id="pageBar" role="tablist" aria-label="페이지"></div>
+      <div class="canvas-scroll" id="canvasScroll">
+        <div class="canvas" id="canvas">
+          <div class="canvas-grid" id="canvasGrid" aria-hidden="true"></div>
+          <div class="canvas-blocks" id="canvasBlocks"></div>
+          <p class="canvas-empty" id="canvasEmpty">왼쪽에서 블록을 골라 도면을 시작하세요. 빈 캔버스에 그릴 필요는 없습니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <aside class="rail" id="rail" aria-label="선택 항목 편집"></aside>
+  </div>
+</section>
+
+<!-- ═══════════════ 명세서 (인쇄·공유) ═══════════════ -->
+<article class="sheet" id="sheet" hidden aria-label="견적 명세서"></article>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<noscript>
+  <div class="noscript">이 편집기는 자바스크립트가 필요합니다. 템플릿과 안내는 그대로 읽으실 수 있습니다.</div>
+</noscript>
+
+<script src="assets/data.js"></script>
+<script src="assets/core.js"></script>
+<script src="assets/canvas.js"></script>
+<script src="assets/rail.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

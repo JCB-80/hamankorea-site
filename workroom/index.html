@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>작업방 | Haman Korea</title><link rel="stylesheet" href="styles.css"><script defer src="app.js"></script></head>
+<body>
+<header><div class="bar"><a class="brand" href="/idea-web/" aria-label="하만코리아 아이디어 웹">HAMAN<span>✳</span></a><span class="separator"></span><strong>작업방</strong><span id="mode" class="mode">공개 체험판 · AI 미연결</span></div></header>
+<main>
+<section aria-labelledby="title" class="hero">
+ <div class="hero-copy"><span class="tag"><span></span> VIRTUAL OFFICE</span><h1 id="title">한 번의 요청이<br><em>팀의 일이 되기까지.</em></h1><p class="sub">하나의 요청을 7개 역할에 나누는 흐름을 체험해 보세요.<br class="desktop"> GPT·제미나이는 연결하지 않았으며 결과는 예시입니다.</p></div>
+ <div class="art" aria-hidden="true"><div class="tile paper"><b>07</b><small>TEAM STATIONS</small></div><div class="tile shadow"></div><div class="tile orange"><i></i><i></i><i></i><strong>H.</strong></div><div class="orbit"></div></div>
+</section>
+<div class="grid">
+ <section class="card job"><div class="card-head"><div><span class="overline">01 / BRIEF</span><h2>새 작업 맡기기</h2></div><button id="example" class="plain" type="button">예시 불러오기</button></div>
+ <form id="job"><label for="brief">작업 요청</label><textarea id="brief" rows="4" maxlength="2000" required placeholder="예: 공식 자료를 바탕으로 히메지성 15초 콘티를 만들어 줘."></textarea>
+ <div class="form-foot"><small id="counter">0 / 2,000</small><button type="submit" id="submit" disabled>작업 시작</button></div></form>
+ <p id="notice" class="notice" role="status">입력한 내용은 이 화면에서만 사용하며 서버로 보내지 않습니다.</p>
+ </section>
+ <section class="card stations"><div class="card-head"><div><span class="overline">02 / TEAM</span><h2>7개 담당 자리</h2></div><span class="smallpill" id="stage">대기</span></div><ol id="roles"></ol></section>
+ <section class="card result" aria-labelledby="result-title"><div class="card-head"><div><span class="overline">03 / OUTPUT</span><h2 id="result-title">작업 결과</h2></div><button type="button" id="copy" class="plain" disabled>결과 복사</button></div><div id="results" aria-live="polite"><p class="placeholder">작업을 시작하면 담당별 예시 결과가 여기에 표시됩니다.</p></div></section>
+</div>
+<section class="tools" id="tools" hidden><h2>작업 도구</h2><ul id="tool-list"></ul></section>
+</main>
+<footer><p>하만코리아 <span>·</span> 작업방</p><a href="/idea-web/">아이디어 웹으로 돌아가기</a></footer>
+</body></html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>모션 사전 | 라담 작업실</title>
+<link rel="stylesheet" href="motion.css">
+<script src="motion.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">내용 바로가기</a>
+<header class="bar"><a href="./" class="brand"><span class="brand-icon" aria-hidden="true">R</span> 라담 작업실</a><span class="index-label">도구 05 / 모션 사전</span></header>
+<main id="main">
+<section class="intro" aria-labelledby="headline"><p class="eyebrow"><i></i> 제작 도구 · 움직임</p><h1 id="headline">모션 사전<span>.</span></h1><p>움직임을 고르고 타이밍을 조절하세요. 미리 본 설정을 제작 프롬프트로 복사할 수 있습니다.</p></section>
+<div class="workbench">
+<section class="library" aria-labelledby="library-title">
+<div class="section-head"><h2 id="library-title">모션 목록</h2><span id="count" aria-live="polite"></span></div>
+<label class="sr-only" for="search">모션 검색</label><input id="search" type="search" autocomplete="off" placeholder="검색: 줌, 등장, 강조…" />
+<div id="filters" class="filters" role="group" aria-label="모션 유형"></div>
+<div id="presets" class="presets"></div>
+<p class="empty" id="empty" hidden>검색 결과가 없어요. 다른 이름이나 유형으로 찾아보세요.</p>
+</section>
+<section class="inspector" aria-labelledby="selected-title">
+<div class="section-head"><h2 id="selected-title"></h2><span id="category"></span></div>
+<p class="description" id="description"></p>
+<div class="stage" id="stage" aria-hidden="true"><div class="cross"></div><div class="stage-watermark">MOTION LAB  /  LIVE PREVIEW</div><div class="demo" id="demo"><span class="core"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+<div class="controls"><button type="button" id="play">재생</button><button type="button" id="reset">되감기</button><label class="check"><input type="checkbox" id="repeat"> 반복</label><label class="timeline"><span class="sr-only">미리보기 위치</span><input id="seek" type="range" min="0" max="1000" value="0" step="1"><output id="position" for="seek">0.00초</output></label></div>
+<div class="parameters" role="group" aria-label="모션 설정">
+<label for="duration">길이 <output id="duration-value" for="duration">1.2초</output><input id="duration" type="range" min="0.3" max="4" step="0.1" value="1.2"></label>
+<label for="strength">강도 <output id="strength-value" for="strength">60%</output><input id="strength" type="range" min="10" max="100" step="5" value="60"></label>
+<label for="easing">속도 곡선<select id="easing"><option value="ease-out">감속</option><option value="ease-in-out">가속 후 감속</option><option value="ease-in">가속</option><option value="linear">일정</option></select></label>
+</div>
+<div class="prompt"><div class="section-head"><h2>제작 프롬프트</h2><button type="button" id="copy">프롬프트 복사</button></div><label class="sr-only" for="prompt-text">복사할 제작 프롬프트</label><textarea id="prompt-text" readonly rows="4"></textarea><div id="copy-status" role="status"></div></div>
+</section>
+</div>
+</main>
+<footer>라담 작업실 <span>로컬 미리보기 · 입력값 외부 전송 없음</span></footer>
+</body>
+</html>

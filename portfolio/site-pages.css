@@ -8,3 +8,11 @@
 .hk-page-nav a:hover::after,.hk-page-nav a:focus-visible::after,.hk-page-nav a[aria-current=page]::after{opacity:1}
 .hk-contact-cta:focus-visible{outline:2px solid #8b6f47;outline-offset:4px}
 @media(forced-colors:active){.hk-page-nav a,.hk-page-nav a:hover,.hk-page-nav a[aria-current=page]{text-decoration:underline;text-underline-offset:4px}.hk-page-nav a::after{display:none}}
+
+/* Keep primary navigation at the left and the standalone contact action at the right. */
+@media(min-width:901px){
+  .hk-page-header{display:grid;grid-template-columns:max-content minmax(0,1fr) max-content;grid-template-areas:"brand nav contact"}
+  .hk-page-brand{grid-area:brand}
+  .hk-page-nav{grid-area:nav;justify-content:flex-start;min-width:0}
+  .hk-contact-cta{grid-area:contact;justify-self:end}
+}

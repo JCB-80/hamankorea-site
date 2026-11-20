@@ -1,0 +1,2151 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>흑백 점프 · 신박랩</title>
+    <meta
+      name="description"
+      content="클래식 횡스크롤을 1비트 흑백으로 옮긴 오리지널 웹 게임. 두 개의 스테이지를 통과해 결승문까지 달려 보세요."
+    />
+    <meta name="theme-color" content="#f2ede2" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f2ede2'/%3E%3Crect x='4' y='4' width='24' height='6' fill='%2317140e'/%3E%3Crect x='4' y='13' width='24' height='6' fill='%23d8402a'/%3E%3Crect x='4' y='22' width='24' height='6' fill='%2317140e'/%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f2ede2;
+        --paper-raised: #faf6ec;
+        --paper-deep: #e8e1d2;
+        --ink: #17140e;
+        --ink-soft: #4b463a;
+        --ink-faint: #7c7464;
+        --line: #d9d1bf;
+        --line-strong: #b5aa92;
+        --signal: #d8402a;
+        --signal-deep: #a62c19;
+        --font-display: "Black Han Sans", "Apple SD Gothic Neo", sans-serif;
+        --font-sans: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+        --gutter: clamp(18px, 4vw, 56px);
+        --shadow-hard: 8px 8px 0 rgb(23 20 14 / 0.16);
+        --grid-line: rgb(23 20 14 / 0.055);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        overflow-x: clip;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        background-color: var(--paper);
+        background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+        background-size: 28px 28px;
+        background-position: -1px -1px;
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+        color: inherit;
+        border: 0;
+        background: none;
+        cursor: pointer;
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--ink);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+
+      .mono {
+        font-family: var(--font-mono);
+        font-size: 0.78em;
+        letter-spacing: 0.02em;
+      }
+
+      .wrap {
+        width: min(100% - (var(--gutter) * 2), 1120px);
+        margin-inline: auto;
+      }
+
+      /* header ---------------------------------------------------------- */
+      .gh {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid var(--line-strong);
+        background: color-mix(in srgb, var(--paper) 90%, transparent);
+        backdrop-filter: blur(10px);
+      }
+
+      .gh-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        min-height: 60px;
+      }
+
+      .gh-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+
+      .back {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        color: var(--ink-soft);
+        font-size: 0.78rem;
+        white-space: nowrap;
+      }
+
+      .back:hover {
+        color: var(--ink);
+      }
+
+      .brand {
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: -0.02em;
+        padding-left: 13px;
+        border-left: 1px solid var(--line-strong);
+        white-space: nowrap;
+      }
+
+      .gh-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .gh-link {
+        padding: 6px 9px;
+        color: var(--ink-soft);
+        font-size: 0.76rem;
+        border-radius: 2px;
+      }
+
+      .gh-link:hover {
+        color: var(--ink);
+        background: var(--paper-deep);
+      }
+
+      .sound {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 9px;
+        border: 1px solid var(--line-strong);
+        border-radius: 2px;
+        background: var(--paper-raised);
+        color: var(--ink-soft);
+        font-size: 0.72rem;
+      }
+
+      .sound:hover {
+        border-color: var(--ink);
+        color: var(--ink);
+      }
+
+      /* intro ----------------------------------------------------------- */
+      .gm {
+        padding-top: clamp(24px, 4vw, 46px);
+        padding-bottom: 64px;
+      }
+
+      .intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 24px;
+        align-items: end;
+        margin-bottom: 22px;
+      }
+
+      .kicker {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        letter-spacing: 0.06em;
+        color: var(--ink-faint);
+        margin-bottom: 8px;
+      }
+
+      .title {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: clamp(2.8rem, 7vw, 5rem);
+        line-height: 0.92;
+        letter-spacing: -0.03em;
+      }
+
+      .lede {
+        max-width: 48ch;
+        margin-top: 10px;
+        color: var(--ink-soft);
+        font-size: 0.94rem;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: flex-end;
+      }
+
+      .badge {
+        padding: 3px 8px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--paper-raised);
+        color: var(--ink-soft);
+        font-size: 0.68rem;
+        white-space: nowrap;
+      }
+
+      /* cabinet --------------------------------------------------------- */
+      .cabinet {
+        width: min(100%, calc((100vh - 360px) * 1.7778));
+        margin-inline: auto;
+        background: var(--ink);
+        border: 1px solid var(--ink);
+        padding: 10px;
+        box-shadow: var(--shadow-hard);
+      }
+
+      .cab-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 1px 2px 8px;
+        color: #bdb5a4;
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+      }
+
+      .hud {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding: 0 2px 9px;
+        color: var(--paper-raised);
+        font-family: var(--font-mono);
+      }
+
+      .hud-item {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 6px;
+        min-width: 0;
+      }
+
+      .hud-item span {
+        color: #a49c8c;
+        font-family: var(--font-sans);
+        font-size: 0.62rem;
+        white-space: nowrap;
+      }
+
+      .hud-item b {
+        font-weight: 500;
+        font-size: 0.8rem;
+        letter-spacing: 0.03em;
+        white-space: nowrap;
+      }
+
+      .hud-lives {
+        letter-spacing: 0.12em;
+      }
+
+      .screen {
+        position: relative;
+        border: 1px solid #000;
+        background: #f6f1e6;
+        overflow: hidden;
+      }
+
+      .screen canvas {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        image-rendering: pixelated;
+        background: #f6f1e6;
+        touch-action: none;
+      }
+
+      .overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 4;
+        display: grid;
+        place-items: center;
+        padding: clamp(14px, 3vw, 28px);
+        background: color-mix(in srgb, var(--paper-raised) 91%, transparent);
+        text-align: center;
+      }
+
+      .overlay[hidden] {
+        display: none;
+      }
+
+      .ov-inner {
+        display: grid;
+        justify-items: center;
+        gap: 8px;
+        max-width: 420px;
+        animation: ov-in 220ms ease-out;
+      }
+
+      @keyframes ov-in {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+      }
+
+      .ov-kicker {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.08em;
+        color: var(--ink-faint);
+      }
+
+      .ov-title {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: clamp(2rem, 5.4vw, 3.4rem);
+        line-height: 0.96;
+        letter-spacing: -0.025em;
+      }
+
+      .ov-text {
+        max-width: 38ch;
+        color: var(--ink-soft);
+        font-size: 0.8rem;
+        line-height: 1.65;
+      }
+
+      .ov-sub {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 4px;
+      }
+
+      .ov-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        min-height: 40px;
+        padding: 8px 16px;
+        border: 1.5px solid var(--ink);
+        border-radius: 2px;
+        background: var(--ink);
+        color: var(--paper-raised);
+        font-size: 0.8rem;
+        font-weight: 600;
+        box-shadow: 3px 3px 0 rgb(23 20 14 / 0.18);
+        transition: transform 120ms ease, box-shadow 120ms ease;
+      }
+
+      .ov-btn:hover {
+        transform: translate(-1px, -1px);
+        box-shadow: 4px 4px 0 rgb(23 20 14 / 0.22);
+      }
+
+      .ov-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: none;
+      }
+
+      .ov-btn--ghost {
+        background: transparent;
+        color: var(--ink);
+        box-shadow: none;
+        border-color: var(--line-strong);
+        font-weight: 500;
+      }
+
+      .ov-btn--ghost:hover {
+        border-color: var(--ink);
+        background: var(--paper-soft);
+        box-shadow: none;
+      }
+
+      .ov-key {
+        padding: 0 5px;
+        border: 1px solid currentColor;
+        border-radius: 2px;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        opacity: 0.72;
+      }
+
+      .ov-meta {
+        margin-top: 2px;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+      }
+
+      .ov-stats {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px 16px;
+        color: var(--ink-soft);
+        font-size: 0.76rem;
+      }
+
+      /* touch ----------------------------------------------------------- */
+      .touch {
+        display: none;
+        grid-template-columns: 1fr 1fr 1.4fr;
+        gap: 7px;
+        margin-top: 10px;
+      }
+
+      .touch button {
+        height: 54px;
+        border: 1px solid #4a453b;
+        border-radius: 2px;
+        background: #211e18;
+        color: var(--paper-raised);
+        font-size: 1.05rem;
+        font-family: var(--font-mono);
+        touch-action: none;
+        user-select: none;
+      }
+
+      .touch button:active {
+        background: var(--signal);
+        border-color: var(--signal);
+      }
+
+      .touch .jump {
+        font-family: var(--font-sans);
+        font-weight: 600;
+        font-size: 0.86rem;
+        background: var(--signal);
+        border-color: var(--signal);
+      }
+
+      /* below ----------------------------------------------------------- */
+      .under {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+
+      .under-actions {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        min-height: 36px;
+        padding: 6px 12px;
+        border: 1px solid var(--line-strong);
+        border-radius: 2px;
+        background: var(--paper-raised);
+        color: var(--ink);
+        font-size: 0.76rem;
+        font-weight: 500;
+        transition: border-color 120ms ease, background-color 120ms ease;
+      }
+
+      .btn:hover {
+        border-color: var(--ink);
+        background: var(--paper-deep);
+      }
+
+      .btn--primary {
+        background: var(--signal);
+        border-color: var(--signal-deep);
+        color: var(--paper-raised);
+      }
+
+      .btn--primary:hover {
+        background: var(--signal-deep);
+        border-color: var(--signal-deep);
+      }
+
+      .record {
+        color: var(--ink-faint);
+        font-size: 0.72rem;
+      }
+
+      .record b {
+        color: var(--ink);
+        font-family: var(--font-mono);
+        font-weight: 500;
+      }
+
+      .legend {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 28px;
+        padding-top: 16px;
+        border-top: 2px solid var(--ink);
+      }
+
+      .legend-item {
+        display: grid;
+        gap: 4px;
+        font-size: 0.76rem;
+        color: var(--ink-soft);
+      }
+
+      .legend-item strong {
+        color: var(--ink);
+        font-size: 0.84rem;
+      }
+
+      .keys {
+        display: flex;
+        gap: 3px;
+        flex-wrap: wrap;
+      }
+
+      .kbd {
+        display: inline-block;
+        min-width: 22px;
+        padding: 1px 5px;
+        border: 1px solid var(--line-strong);
+        border-bottom-width: 2px;
+        border-radius: 3px;
+        background: var(--paper-raised);
+        color: var(--ink-soft);
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        text-align: center;
+      }
+
+      .notes {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line-strong);
+      }
+
+      .note h3 {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .note p {
+        color: var(--ink-soft);
+        font-size: 0.8rem;
+        line-height: 1.7;
+      }
+
+      .foot {
+        margin-top: 40px;
+        padding: 18px 0 30px;
+        border-top: 1px solid var(--line-strong);
+        color: var(--ink-faint);
+        font-size: 0.72rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .foot p {
+        max-width: 68ch;
+      }
+
+      @media (max-width: 860px) {
+        .intro {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .meta {
+          justify-content: flex-start;
+        }
+
+        .legend {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .notes {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .hud {
+          gap: 4px 12px;
+        }
+
+        .hud-item span {
+          font-size: 0.55rem;
+        }
+
+        .hud-item b {
+          font-size: 0.7rem;
+        }
+
+        .hud-stage {
+          margin-left: 0;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .brand {
+          display: none;
+        }
+
+        .gh-link {
+          display: none;
+        }
+
+        .cabinet {
+          padding: 6px;
+          box-shadow: 5px 5px 0 rgb(23 20 14 / 0.18);
+        }
+
+        .cab-top {
+          font-size: 0.52rem;
+          padding-bottom: 6px;
+        }
+
+        .ov-text {
+          font-size: 0.74rem;
+        }
+
+        .legend {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (pointer: coarse), (max-width: 820px) {
+        .touch {
+          display: grid;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.001ms !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="gh">
+      <div class="wrap gh-inner">
+        <div class="gh-left">
+          <a class="back" href="./">← 아케이드</a>
+          <span class="brand">신박랩</span>
+        </div>
+        <div class="gh-right">
+          <a class="gh-link" href="../#table">23곳 보기</a>
+          <button class="sound" type="button" id="sound-top" aria-pressed="true">소리 끄기</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="gm wrap">
+      <div class="intro">
+        <div>
+          <span class="kicker">1비트 플랫포머 · 오리지널</span>
+          <h1 class="title">흑백 점프</h1>
+          <p class="lede">
+            달리고, 뛰고, 밟으세요. 두 개의 스테이지를 지나 마지막 문까지 가면 끝입니다.
+            종이와 잉크만 쓴 클래식 횡스크롤.
+          </p>
+        </div>
+        <div class="meta" aria-label="게임 정보">
+          <span class="badge">2 스테이지</span>
+          <span class="badge">키보드 · 터치</span>
+          <span class="badge">설치 없음</span>
+        </div>
+      </div>
+
+      <div class="cabinet" id="cabinet">
+        <div class="cab-top">
+          <span>MONO JUMP</span>
+          <span>1-BIT / PAPER &amp; INK</span>
+        </div>
+        <div class="hud">
+          <div class="hud-item"><span>점수</span><b id="hud-score">000000</b></div>
+          <div class="hud-item"><span>잉크</span><b id="hud-drops">00</b></div>
+          <div class="hud-item"><span>목숨</span><b class="hud-lives" id="hud-lives">■■■</b></div>
+          <div class="hud-item"><span>시간</span><b id="hud-time">00:00</b></div>
+          <div class="hud-item hud-stage"><span>스테이지</span><b id="hud-stage">01 / 02</b></div>
+        </div>
+        <div class="screen" id="screen" tabindex="0" aria-label="흑백 점프 게임 화면">
+          <canvas id="game" width="480" height="270" aria-label="게임 캔버스"></canvas>
+          <div class="overlay" id="overlay" role="dialog" aria-label="게임 안내"></div>
+        </div>
+        <div class="touch" aria-label="터치 조작">
+          <button type="button" data-touch="left" aria-label="왼쪽">←</button>
+          <button type="button" data-touch="right" aria-label="오른쪽">→</button>
+          <button type="button" class="jump" data-touch="jump">점프</button>
+        </div>
+      </div>
+
+      <div class="under">
+        <div class="under-actions">
+          <button class="btn btn--primary" type="button" id="btn-restart">다시 시작</button>
+          <button class="btn" type="button" id="sound-bottom" aria-pressed="true">소리 끄기</button>
+          <a class="btn" href="./">아케이드로</a>
+        </div>
+        <span class="record">최고 기록 <b id="best-time">—</b></span>
+      </div>
+
+      <section class="legend" aria-label="조작 방법">
+        <div class="legend-item">
+          <strong>이동</strong>
+          <span class="keys"><span class="kbd">←</span><span class="kbd">→</span><span class="kbd">A</span><span class="kbd">D</span></span>
+        </div>
+        <div class="legend-item">
+          <strong>점프</strong>
+          <span class="keys"><span class="kbd">Space</span><span class="kbd">↑</span><span class="kbd">W</span></span>
+        </div>
+        <div class="legend-item">
+          <strong>일시정지</strong>
+          <span class="keys"><span class="kbd">P</span><span class="kbd">Esc</span></span>
+        </div>
+        <div class="legend-item">
+          <strong>다시 · 소리</strong>
+          <span class="keys"><span class="kbd">R</span><span class="kbd">M</span></span>
+        </div>
+      </section>
+
+      <section class="notes" aria-label="게임 설명">
+        <div class="note">
+          <h3>적은 밟아야 합니다</h3>
+          <p>옆에서 부딪히면 목숨을 하나 잃습니다. 위에서 떨어지면 적이 납작해지고 점수가 오릅니다.</p>
+        </div>
+        <div class="note">
+          <h3>잉크를 모아 보세요</h3>
+          <p>검은 방울 하나에 100점. 다 모으지 않아도 클리어할 수 있지만, 점수는 모은 만큼 쌓입니다.</p>
+        </div>
+        <div class="note">
+          <h3>목숨은 세 개</h3>
+          <p>떨어지거나 부딪히면 체크포인트에서 다시 시작합니다. 마지막 스테이지까지 가면 기록이 저장됩니다.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot wrap">
+      <p>
+        마리오의 스프라이트, 이름, 음악을 쓰지 않고 장르만 참고해 새로 만든 오리지널 흑백 게임입니다.
+        사운드는 브라우저에서 합성하며, 최고 기록은 이 브라우저에만 저장됩니다.
+      </p>
+      <p>SHINBAK-LAB / 2026</p>
+    </footer>
+
+    <noscript>
+      <p class="wrap" style="padding-bottom: 40px">이 게임은 자바스크립트가 필요합니다.</p>
+    </noscript>
+
+    <script>
+      (function () {
+        "use strict";
+
+        /* ------------------------------------------------------------------
+           기본 설정과 저장소
+        ------------------------------------------------------------------ */
+        const W = 480;
+        const H = 270;
+        const GROUND = 238;
+        const PW = 11;
+        const PH = 18;
+        const GRAVITY = 1700;
+        const JUMP_V = 480;
+        const MAX_VX = 190;
+        const ACCEL = 1050;
+        const AIR_ACCEL = 760;
+        const FRICTION = 1250;
+        const canvas = document.getElementById("game");
+        const ctx = canvas.getContext("2d");
+        const screenEl = document.getElementById("screen");
+        const overlay = document.getElementById("overlay");
+        const cabinet = document.getElementById("cabinet");
+        const hud = {
+          score: document.getElementById("hud-score"),
+          drops: document.getElementById("hud-drops"),
+          lives: document.getElementById("hud-lives"),
+          time: document.getElementById("hud-time"),
+          stage: document.getElementById("hud-stage"),
+        };
+        const bestEl = document.getElementById("best-time");
+        const soundBtns = [
+          document.getElementById("sound-top"),
+          document.getElementById("sound-bottom"),
+        ].filter(Boolean);
+        const restartBtn = document.getElementById("btn-restart");
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const storage = {
+          get(key, fallback) {
+            try {
+              const raw = localStorage.getItem(key);
+              return raw === null ? fallback : JSON.parse(raw);
+            } catch (err) {
+              return fallback;
+            }
+          },
+          set(key, value) {
+            try {
+              localStorage.setItem(key, JSON.stringify(value));
+            } catch (err) {
+              /* file:// or private mode — 기록은 이번 세션에만 남습니다 */
+            }
+          },
+        };
+
+        const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+        const formatTime = (seconds) => {
+          const total = Math.max(0, Math.floor(seconds));
+          return `${String(Math.floor(total / 60)).padStart(2, "0")}:${String(total % 60).padStart(2, "0")}`;
+        };
+
+        /* ------------------------------------------------------------------
+           사운드 — 브라우저에서 합성하는 짧은 비프
+        ------------------------------------------------------------------ */
+        let audio = null;
+        let muted = storage.get("mono.muted", false);
+
+        function ensureAudio() {
+          if (audio) {
+            if (audio.state === "suspended") audio.resume();
+            return;
+          }
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) return;
+          try {
+            audio = new Ctx();
+          } catch (err) {
+            audio = null;
+          }
+        }
+
+        function tone(freq, duration, type, volume, slideTo, delay) {
+          if (muted || !audio) return;
+          const start = audio.currentTime + (delay || 0);
+          const osc = audio.createOscillator();
+          const gain = audio.createGain();
+          osc.type = type || "square";
+          osc.frequency.setValueAtTime(freq, start);
+          if (slideTo) osc.frequency.exponentialRampToValueAtTime(slideTo, start + duration);
+          gain.gain.setValueAtTime(volume || 0.04, start);
+          gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+          osc.connect(gain);
+          gain.connect(audio.destination);
+          osc.start(start);
+          osc.stop(start + duration + 0.02);
+        }
+
+        const sfx = {
+          jump: () => tone(330, 0.12, "square", 0.035, 620),
+          coin: () => {
+            tone(880, 0.06, "square", 0.03);
+            tone(1320, 0.09, "square", 0.028, null, 0.05);
+          },
+          stomp: () => tone(190, 0.1, "triangle", 0.055, 80),
+          hurt: () => tone(250, 0.32, "sawtooth", 0.045, 70),
+          land: () => tone(120, 0.045, "triangle", 0.025, 80),
+          checkpoint: () => {
+            tone(660, 0.08, "square", 0.03);
+            tone(990, 0.12, "square", 0.03, null, 0.08);
+          },
+          clear: () => {
+            [523, 659, 784, 1047].forEach((freq, index) =>
+              tone(freq, 0.16, "square", 0.032, null, index * 0.11)
+            );
+          },
+          over: () => {
+            [330, 262, 196].forEach((freq, index) =>
+              tone(freq, 0.24, "sawtooth", 0.035, null, index * 0.17)
+            );
+          },
+        };
+
+        function syncSound() {
+          const label = muted ? "소리 켜기" : "소리 끄기";
+          soundBtns.forEach((button) => {
+            button.textContent = label;
+            button.setAttribute("aria-pressed", muted ? "false" : "true");
+          });
+        }
+
+        function toggleMute() {
+          muted = !muted;
+          storage.set("mono.muted", muted);
+          syncSound();
+          if (!muted) {
+            ensureAudio();
+            tone(660, 0.07, "square", 0.03);
+          }
+        }
+
+        /* ------------------------------------------------------------------
+           스테이지 — 바닥 [x, 넓이], 발판 [x, y, 넓이]
+        ------------------------------------------------------------------ */
+        const STAGES = [
+          {
+            name: "PAPER",
+            theme: "paper",
+            width: 3000,
+            spawn: { x: 38, y: 220 },
+            ground: [
+              [0, 420],
+              [490, 980],
+              [1056, 1520],
+              [1590, 2160],
+              [2232, 2560],
+              [2630, 3000],
+            ],
+            platforms: [
+              [230, 190, 70],
+              [350, 150, 56],
+              [650, 190, 90],
+              [800, 150, 64],
+              [1120, 190, 96],
+              [1280, 150, 70],
+              [1700, 190, 104],
+              [1880, 150, 64],
+              [2280, 190, 80],
+              [2400, 150, 56],
+              [2700, 190, 80],
+              [2840, 150, 48],
+            ],
+            enemies: [
+              [560, 226, 40],
+              [900, 226, 40],
+              [672, 178, 34],
+              [1180, 226, 44],
+              [1760, 226, 40],
+              [1722, 178, 36],
+              [2330, 226, 44],
+              [2760, 226, 40],
+            ],
+            coins: [
+              [430, 200], [452, 188], [474, 200],
+              [244, 168], [264, 168], [284, 168],
+              [1000, 200], [1022, 188], [1044, 200],
+              [668, 166], [696, 166], [724, 166],
+              [814, 128], [838, 128],
+              [1540, 200], [1562, 188],
+              [1148, 168], [1176, 168], [1204, 168],
+              [1294, 128], [1318, 128],
+              [2186, 200], [2208, 188], [2230, 200],
+              [1728, 168], [1756, 168], [1784, 168],
+              [1894, 128], [1918, 128],
+              [2600, 200], [2622, 188],
+              [2300, 168], [2328, 168],
+              [2414, 128], [2438, 128],
+              [2800, 210], [2828, 200], [2856, 210],
+            ],
+            checkpoint: { x: 1600, y: 220 },
+            goal: { x: 2920, y: 198 },
+          },
+          {
+            name: "NIGHT",
+            theme: "night",
+            width: 3200,
+            spawn: { x: 38, y: 220 },
+            ground: [
+              [0, 300],
+              [364, 760],
+              [832, 1100],
+              [1168, 1600],
+              [1672, 2000],
+              [2072, 2400],
+              [2472, 3200],
+            ],
+            platforms: [
+              [150, 190, 64],
+              [250, 146, 56],
+              [660, 146, 56],
+              [900, 196, 80],
+              [1230, 190, 64],
+              [1360, 146, 64],
+              [1470, 190, 56],
+              [1760, 190, 88],
+              [1900, 146, 56],
+              [2120, 190, 80],
+              [2260, 146, 56],
+              [2520, 190, 72],
+              [2660, 146, 56],
+              [2860, 190, 64],
+            ],
+            enemies: [
+              [620, 226, 40],
+              [900, 226, 52],
+              [1250, 226, 40],
+              [1760, 226, 52],
+              [1790, 178, 36],
+              [2150, 226, 44],
+              [2550, 226, 52],
+              [2900, 226, 40],
+              [3060, 226, 44],
+            ],
+            coins: [
+              [330, 200], [352, 188],
+              [170, 168], [220, 168], [270, 124], [300, 124],
+              [520, 168], [560, 168], [600, 168],
+              [700, 124], [730, 124],
+              [800, 200], [830, 188], [860, 200],
+              [920, 174], [950, 174],
+              [1120, 200], [1140, 188], [1160, 200],
+              [1240, 168], [1270, 168],
+              [1370, 124], [1395, 124],
+              [1500, 168], [1540, 168],
+              [1640, 200], [1660, 188],
+              [1770, 168], [1800, 168], [1830, 168],
+              [1910, 124], [1935, 124],
+              [2020, 200], [2040, 188],
+              [2130, 168], [2160, 168],
+              [2270, 124], [2295, 124],
+              [2410, 200], [2430, 188],
+              [2530, 168], [2560, 168],
+              [2670, 124], [2695, 124],
+              [2800, 200], [2820, 188], [2840, 200],
+              [2870, 168], [2900, 168],
+              [2960, 168], [2990, 168],
+              [2990, 210], [3010, 200], [3030, 210],
+            ],
+            checkpoint: { x: 1000, y: 220 },
+            goal: { x: 3120, y: 198 },
+          },
+        ];
+
+        const THEMES = {
+          paper: {
+            bg: "#f6f1e6",
+            panel: "#fbf8f1",
+            ink: "#14110c",
+            soft: "#ddd5c5",
+            mid: "#8e8778",
+            hatch: "rgba(20, 17, 12, 0.15)",
+            halo: "rgba(20, 17, 12, 0.07)",
+            pit: "#14110c",
+            pitLine: "rgba(246, 241, 230, 0.12)",
+          },
+          night: {
+            bg: "#0b0b0c",
+            panel: "#151412",
+            ink: "#f2ede2",
+            soft: "#23211d",
+            mid: "#6c675c",
+            hatch: "rgba(242, 237, 226, 0.13)",
+            halo: "rgba(242, 237, 226, 0.07)",
+            pit: "#050506",
+            pitLine: "rgba(242, 237, 226, 0.17)",
+          },
+        };
+
+        const stars = (() => {
+          let seed = 17;
+          const out = [];
+          for (let i = 0; i < 46; i += 1) {
+            seed = (seed * 16807) % 2147483647;
+            const x = (seed % 480) + 0.5;
+            seed = (seed * 16807) % 2147483647;
+            const y = (seed % 170) + 4;
+            seed = (seed * 16807) % 2147483647;
+            out.push({ x, y, r: 0.5 + (seed % 10) / 12, phase: (seed % 100) / 16 });
+          }
+          return out;
+        })();
+
+        /* ------------------------------------------------------------------
+           상태
+        ------------------------------------------------------------------ */
+        const STATE = {
+          TITLE: "title",
+          PLAY: "play",
+          PAUSE: "pause",
+          DEAD: "dead",
+          CLEAR: "clear",
+          OVER: "over",
+        };
+
+        let state = STATE.TITLE;
+        let stageIndex = 0;
+        let stage = STAGES[0];
+        let theme = THEMES[stage.theme];
+        let solids = [];
+        let enemies = [];
+        let coins = [];
+        let particles = [];
+        let player = null;
+        let cam = { x: 0 };
+        let score = 0;
+        let drops = 0;
+        let lives = 3;
+        let elapsed = 0;
+        let stageTime = 0;
+        let checkpointReached = false;
+        let deathTimer = 0;
+        let shake = 0;
+        let jumpBuffer = 0;
+        let keys = { left: false, right: false, jump: false };
+        let last = 0;
+        let raf = 0;
+        let hudSecond = -1;
+        let best = storage.get("mono.best", 0);
+
+        /* ------------------------------------------------------------------
+           스테이지 로드
+        ------------------------------------------------------------------ */
+        function buildSolids() {
+          solids = [];
+          stage.ground.forEach(([x, w]) => {
+            solids.push({ x, y: GROUND, w, h: H - GROUND + 20, ground: true });
+          });
+          stage.platforms.forEach(([x, y, w]) => {
+            solids.push({ x, y, w, h: 10, ground: false });
+          });
+        }
+
+        function loadStage(index, keepCheckpoint, keepTime) {
+          stageIndex = index;
+          stage = STAGES[index];
+          theme = THEMES[stage.theme];
+          buildSolids();
+          enemies = stage.enemies.map(([x, y, speed]) => ({
+            x,
+            y,
+            w: 14,
+            h: 12,
+            dir: -1,
+            speed,
+            baseY: y,
+            phase: Math.random() * Math.PI * 2,
+            alive: true,
+          }));
+          coins = stage.coins.map(([x, y], i) => ({
+            x,
+            y,
+            taken: false,
+            phase: i * 0.7,
+          }));
+          checkpointReached = Boolean(keepCheckpoint);
+          const spawn = checkpointReached ? stage.checkpoint : stage.spawn;
+          player = {
+            x: spawn.x,
+            y: spawn.y,
+            w: PW,
+            h: PH,
+            vx: 0,
+            vy: 0,
+            facing: 1,
+            onGround: false,
+            coyote: 0,
+            anim: 0,
+            squash: 0,
+            invuln: 0,
+            jumpLock: 0,
+            prevBottom: spawn.y + PH,
+          };
+          cam.x = clamp(spawn.x - W * 0.32, 0, stage.width - W);
+          particles = [];
+          stageTime = 0;
+          if (!keepTime) elapsed = 0;
+          jumpBuffer = 0;
+          deathTimer = 0;
+          shake = 0;
+          hudSecond = -1;
+          updateHud();
+          syncBest();
+        }
+
+        function syncBest() {
+          bestEl.textContent = best ? formatTime(best) : "—";
+        }
+
+        /* ------------------------------------------------------------------
+           HUD
+        ------------------------------------------------------------------ */
+        function updateHud() {
+          hud.score.textContent = String(score).padStart(6, "0");
+          hud.drops.textContent = String(drops).padStart(2, "0");
+          hud.lives.textContent = "■".repeat(Math.max(0, lives)) + "□".repeat(Math.max(0, 3 - lives));
+          hud.lives.setAttribute("aria-label", `목숨 ${lives}개`);
+          hud.time.textContent = formatTime(elapsed);
+          hud.stage.textContent = `${String(stageIndex + 1).padStart(2, "0")} / ${String(
+            STAGES.length
+          ).padStart(2, "0")}`;
+        }
+
+        /* ------------------------------------------------------------------
+           충돌
+        ------------------------------------------------------------------ */
+        function overlaps(a, b) {
+          return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+        }
+
+        function solidAt(x, y) {
+          return solids.some((s) => x >= s.x && x <= s.x + s.w && y >= s.y && y <= s.y + s.h);
+        }
+
+        function collideX() {
+          for (const solid of solids) {
+            if (!overlaps(player, solid)) continue;
+            if (player.vx > 0) player.x = solid.x - player.w;
+            else if (player.vx < 0) player.x = solid.x + solid.w;
+            player.vx = 0;
+          }
+        }
+
+        function collideY() {
+          player.onGround = false;
+          for (const solid of solids) {
+            if (!overlaps(player, solid)) continue;
+            if (player.vy > 0) {
+              player.y = solid.y - player.h;
+              player.vy = 0;
+              player.onGround = true;
+            } else if (player.vy < 0) {
+              player.y = solid.y + solid.h;
+              player.vy = 0;
+            }
+          }
+        }
+
+        /* ------------------------------------------------------------------
+           파티클
+        ------------------------------------------------------------------ */
+        function burst(x, y, count, spread, upward) {
+          for (let i = 0; i < count; i += 1) {
+            particles.push({
+              x,
+              y,
+              vx: (Math.random() * 2 - 1) * (spread || 60),
+              vy: (Math.random() * -1 - (upward ? 0.2 : 0.5)) * (spread || 60),
+              life: 0.45 + Math.random() * 0.35,
+              max: 0.8,
+              size: 1 + Math.random() * 2,
+            });
+          }
+        }
+
+        /* ------------------------------------------------------------------
+           플레이어
+        ------------------------------------------------------------------ */
+        function updatePlayer(dt) {
+          const p = player;
+          const move = (keys.right ? 1 : 0) - (keys.left ? 1 : 0);
+
+          if (move !== 0) {
+            p.vx += move * (p.onGround ? ACCEL : AIR_ACCEL) * dt;
+            p.facing = move;
+          } else {
+            const friction = FRICTION * dt;
+            if (Math.abs(p.vx) <= friction) p.vx = 0;
+            else p.vx -= Math.sign(p.vx) * friction;
+          }
+          p.vx = clamp(p.vx, -MAX_VX, MAX_VX);
+
+          if (p.onGround) p.coyote = 0.1;
+          else p.coyote = Math.max(0, p.coyote - dt);
+
+          jumpBuffer = Math.max(0, jumpBuffer - dt);
+          if (jumpBuffer > 0 && (p.onGround || p.coyote > 0)) {
+            p.vy = -JUMP_V;
+            p.onGround = false;
+            p.coyote = 0;
+            p.squash = -0.45;
+            p.jumpLock = 0.06;
+            jumpBuffer = 0;
+            sfx.jump();
+          }
+
+          if (p.jumpLock > 0) p.jumpLock = Math.max(0, p.jumpLock - dt);
+          if (!keys.jump && p.vy < -170 && p.jumpLock <= 0) p.vy = -170;
+
+          p.vy = Math.min(p.vy + GRAVITY * dt, 720);
+
+          const wasOnGround = p.onGround;
+          p.prevBottom = p.y + p.h;
+
+          p.x += p.vx * dt;
+          collideX();
+          p.x = clamp(p.x, 0, stage.width - p.w);
+
+          p.y += p.vy * dt;
+          collideY();
+
+          if (!wasOnGround && p.onGround) {
+            p.squash = 1;
+            sfx.land();
+            burst(p.x + p.w / 2, p.y + p.h, 5, 26, false);
+          }
+
+          p.squash += (0 - p.squash) * Math.min(1, dt * 10);
+          p.anim += Math.abs(p.vx) * dt * 0.1;
+          if (p.invuln > 0) p.invuln -= dt;
+
+          if (p.y > H + 30) killPlayer();
+        }
+
+        function updateEnemies(dt) {
+          for (const enemy of enemies) {
+            if (!enemy.alive) continue;
+            enemy.phase += dt * 5;
+            const nextX = enemy.x + enemy.dir * enemy.speed * dt;
+
+            let blocked = solids.some((s) =>
+              overlaps({ x: nextX, y: enemy.y, w: enemy.w, h: enemy.h }, s)
+            );
+            if (blocked) {
+              enemy.dir *= -1;
+            } else {
+              enemy.x = nextX;
+            }
+
+            const probeX = enemy.dir > 0 ? enemy.x + enemy.w + 2 : enemy.x - 2;
+            if (!solidAt(probeX, enemy.y + enemy.h + 4)) {
+              enemy.dir *= -1;
+            }
+
+            if (overlaps(player, enemy) && player.invuln <= 0) {
+              const stomping = player.vy > 0 && player.prevBottom <= enemy.y + 6;
+              if (stomping) {
+                enemy.alive = false;
+                player.vy = -300;
+                player.squash = -0.3;
+                score += 200;
+                drops += 1;
+                shake = Math.max(shake, 5);
+                sfx.stomp();
+                burst(enemy.x + enemy.w / 2, enemy.y + enemy.h / 2, 9, 80, true);
+                updateHud();
+              } else {
+                killPlayer();
+              }
+            }
+          }
+        }
+
+        function updateCoins(dt) {
+          const cx = player.x + player.w / 2;
+          const cy = player.y + player.h / 2;
+          for (const coin of coins) {
+            if (coin.taken) continue;
+            coin.phase += dt * 4;
+            if (Math.hypot(coin.x - cx, coin.y - cy) < 11) {
+              coin.taken = true;
+              drops += 1;
+              score += 100;
+              sfx.coin();
+              burst(coin.x, coin.y, 4, 40, true);
+              updateHud();
+            }
+          }
+        }
+
+        function updateCamera(dt) {
+          const target = clamp(player.x + player.w / 2 - W * 0.4, 0, stage.width - W);
+          cam.x += (target - cam.x) * Math.min(1, dt * 8);
+        }
+
+        function checkCheckpoint() {
+          if (checkpointReached) return;
+          if (player.x + player.w / 2 > stage.checkpoint.x) {
+            checkpointReached = true;
+            sfx.checkpoint();
+            burst(stage.checkpoint.x + 6, GROUND - 20, 8, 60, true);
+          }
+        }
+
+        function checkGoal() {
+          const goal = { x: stage.goal.x, y: stage.goal.y, w: 28, h: 40 };
+          if (overlaps(player, goal)) clearStage();
+        }
+
+        /* ------------------------------------------------------------------
+           상태 전환
+        ------------------------------------------------------------------ */
+        function startRun() {
+          score = 0;
+          drops = 0;
+          lives = 3;
+          elapsed = 0;
+          checkpointReached = false;
+          loadStage(0, false, false);
+          state = STATE.PLAY;
+          hideOverlay();
+          ensureAudio();
+          screenEl.focus({ preventScroll: true });
+          sfx.checkpoint();
+        }
+
+        function restartRun() {
+          startRun();
+        }
+
+        function togglePause() {
+          if (state === STATE.PLAY) {
+            state = STATE.PAUSE;
+            showPause();
+          } else if (state === STATE.PAUSE) {
+            state = STATE.PLAY;
+            hideOverlay();
+            screenEl.focus({ preventScroll: true });
+          }
+        }
+
+        function killPlayer() {
+          if (state !== STATE.PLAY) return;
+          state = STATE.DEAD;
+          deathTimer = 1.05;
+          lives = Math.max(0, lives - 1);
+          player.vy = -300;
+          player.vx = 0;
+          shake = reduceMotion ? 0 : 11;
+          sfx.hurt();
+          burst(player.x + player.w / 2, player.y + player.h / 2, 10, 90, true);
+          updateHud();
+        }
+
+        function clearStage() {
+          if (state !== STATE.PLAY) return;
+          const isLast = stageIndex === STAGES.length - 1;
+          const bonus = 500 + Math.max(0, Math.round(120 - stageTime)) * 10;
+          score += bonus;
+          let newBest = false;
+          if (isLast) {
+            const total = Math.round(elapsed);
+            if (!best || total < best) {
+              best = total;
+              storage.set("mono.best", best);
+              newBest = true;
+            }
+            syncBest();
+          }
+          state = STATE.CLEAR;
+          updateHud();
+          sfx.clear();
+          showClear({ isLast, bonus, newBest });
+        }
+
+        function nextStage() {
+          checkpointReached = false;
+          loadStage(stageIndex + 1, false, true);
+          state = STATE.PLAY;
+          hideOverlay();
+          screenEl.focus({ preventScroll: true });
+        }
+
+        function respawn() {
+          const keptStageTime = stageTime;
+          loadStage(stageIndex, checkpointReached, true);
+          stageTime = keptStageTime;
+          player.invuln = 2;
+          state = STATE.PLAY;
+          hideOverlay();
+          screenEl.focus({ preventScroll: true });
+        }
+
+        /* ------------------------------------------------------------------
+           오버레이
+        ------------------------------------------------------------------ */
+        function showOverlay(html) {
+          overlay.innerHTML = html;
+          overlay.hidden = false;
+          const button = overlay.querySelector("button");
+          if (button) window.setTimeout(() => button.focus({ preventScroll: true }), 30);
+        }
+
+        function hideOverlay() {
+          overlay.hidden = true;
+          overlay.innerHTML = "";
+        }
+
+        function showTitle() {
+          showOverlay(`
+            <div class="ov-inner">
+              <span class="ov-kicker">1비트 플랫포머 · 2 스테이지</span>
+              <h2 class="ov-title">흑백 점프</h2>
+              <p class="ov-text">방향키로 달리고 스페이스로 뛰세요. 적을 밟고, 잉크를 모아 마지막 문까지.</p>
+              <div class="ov-sub">
+                <button class="ov-btn" type="button" data-action="start">시작하기 <span class="ov-key">Space</span></button>
+              </div>
+              <p class="ov-meta">최고 기록 ${best ? formatTime(best) : "—"} · 목숨 3개</p>
+            </div>`);
+        }
+
+        function showPause() {
+          showOverlay(`
+            <div class="ov-inner">
+              <span class="ov-kicker">일시정지</span>
+              <h2 class="ov-title">잠깐 멈춤</h2>
+              <p class="ov-text">P 또는 Esc로 이어서 달릴 수 있습니다.</p>
+              <div class="ov-sub">
+                <button class="ov-btn" type="button" data-action="resume">계속하기</button>
+                <button class="ov-btn ov-btn--ghost" type="button" data-action="restart">처음부터</button>
+              </div>
+            </div>`);
+        }
+
+        function showGameOver() {
+          showOverlay(`
+            <div class="ov-inner">
+              <span class="ov-kicker">게임 오버</span>
+              <h2 class="ov-title">여기까지</h2>
+              <p class="ov-text">목숨을 모두 썼습니다. 점수와 최고 기록은 그대로 남아 있습니다.</p>
+              <p class="ov-stats">
+                <span>점수 ${score.toLocaleString("ko-KR")}</span>
+                <span>스테이지 ${stageIndex + 1} / ${STAGES.length}</span>
+              </p>
+              <div class="ov-sub">
+                <button class="ov-btn" type="button" data-action="retry">다시 도전 <span class="ov-key">R</span></button>
+              </div>
+            </div>`);
+        }
+
+        function showClear({ isLast, bonus, newBest }) {
+          showOverlay(`
+            <div class="ov-inner">
+              <span class="ov-kicker">${isLast ? "ALL CLEAR" : `STAGE ${String(stageIndex + 1).padStart(2, "0")} CLEAR`}</span>
+              <h2 class="ov-title">${isLast ? "끝까지 왔습니다" : "한 고비 넘었습니다"}</h2>
+              <p class="ov-stats">
+                <span>점수 ${score.toLocaleString("ko-KR")}</span>
+                <span>이번 판 ${formatTime(stageTime)}</span>
+                <span>보너스 +${bonus.toLocaleString("ko-KR")}</span>
+              </p>
+              <p class="ov-text">${
+                isLast
+                  ? `총 시간 ${formatTime(elapsed)}${newBest ? " · 신기록!" : ""}`
+                  : "다음 스테이지는 흑백이 뒤집힙니다. 어둠 속에서도 길은 있습니다."
+              }</p>
+              <div class="ov-sub">
+                ${
+                  isLast
+                    ? '<button class="ov-btn" type="button" data-action="retry">다시 하기</button>'
+                    : '<button class="ov-btn" type="button" data-action="next">다음 스테이지</button>'
+                }
+              </div>
+              <p class="ov-meta">최고 기록 ${best ? formatTime(best) : "—"}</p>
+            </div>`);
+        }
+
+        overlay.addEventListener("click", (event) => {
+          const button = event.target.closest("[data-action]");
+          if (!button) return;
+          const action = button.dataset.action;
+          if (action === "start") startRun();
+          else if (action === "resume") togglePause();
+          else if (action === "restart") restartRun();
+          else if (action === "next") nextStage();
+          else if (action === "retry") restartRun();
+        });
+
+        /* ------------------------------------------------------------------
+           입력
+        ------------------------------------------------------------------ */
+        function onKeyDown(event) {
+          const code = event.code;
+          if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(code)) {
+            event.preventDefault();
+          }
+          if (code === "Space") {
+            if (state === STATE.PLAY) event.preventDefault();
+            if (state === STATE.TITLE) {
+              event.preventDefault();
+              startRun();
+              return;
+            }
+          }
+          if (event.repeat) return;
+
+          if (code === "ArrowLeft" || code === "KeyA") keys.left = true;
+          if (code === "ArrowRight" || code === "KeyD") keys.right = true;
+          if (["Space", "ArrowUp", "KeyW", "KeyZ"].includes(code)) {
+            if (state === STATE.PLAY) {
+              keys.jump = true;
+              jumpBuffer = 0.12;
+              ensureAudio();
+            }
+          }
+          if (code === "KeyP" || code === "Escape") {
+            if (state === STATE.PLAY || state === STATE.PAUSE) {
+              event.preventDefault();
+              togglePause();
+            }
+          }
+          if (code === "KeyR") {
+            if (state !== STATE.TITLE) restartRun();
+          }
+          if (code === "KeyM") toggleMute();
+        }
+
+        function onKeyUp(event) {
+          const code = event.code;
+          if (code === "ArrowLeft" || code === "KeyA") keys.left = false;
+          if (code === "ArrowRight" || code === "KeyD") keys.right = false;
+          if (["Space", "ArrowUp", "KeyW", "KeyZ"].includes(code)) {
+            keys.jump = false;
+            if (player && player.vy < -170 && player.jumpLock <= 0) player.vy = -170;
+          }
+        }
+
+        window.addEventListener("keydown", onKeyDown);
+        window.addEventListener("keyup", onKeyUp);
+
+        document.querySelectorAll("[data-touch]").forEach((button) => {
+          const action = button.dataset.touch;
+          const press = (event) => {
+            event.preventDefault();
+            ensureAudio();
+            if (action === "jump") {
+              if (state === STATE.TITLE) {
+                startRun();
+                return;
+              }
+              if (state === STATE.PLAY) {
+                keys.jump = true;
+                jumpBuffer = 0.12;
+              }
+            } else {
+              keys[action] = true;
+            }
+          };
+          const release = (event) => {
+            if (event) event.preventDefault();
+            if (action === "jump") {
+              keys.jump = false;
+              if (player && player.vy < -170 && player.jumpLock <= 0) player.vy = -170;
+            } else {
+              keys[action] = false;
+            }
+          };
+          button.addEventListener("pointerdown", press);
+          button.addEventListener("pointerup", release);
+          button.addEventListener("pointercancel", release);
+          button.addEventListener("pointerleave", release);
+          button.addEventListener("contextmenu", (event) => event.preventDefault());
+        });
+
+        soundBtns.forEach((button) => button.addEventListener("click", toggleMute));
+        restartBtn.addEventListener("click", () => {
+          ensureAudio();
+          restartRun();
+        });
+
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden && state === STATE.PLAY) togglePause();
+        });
+
+        /* ------------------------------------------------------------------
+           업데이트
+        ------------------------------------------------------------------ */
+        function update(dt) {
+          if (state === STATE.PLAY) {
+            elapsed += dt;
+            stageTime += dt;
+            updatePlayer(dt);
+            updateEnemies(dt);
+            updateCoins(dt);
+            checkCheckpoint();
+            checkGoal();
+            updateCamera(dt);
+            const second = Math.floor(elapsed);
+            if (second !== hudSecond) {
+              hudSecond = second;
+              hud.time.textContent = formatTime(elapsed);
+            }
+          } else if (state === STATE.DEAD) {
+            deathTimer -= dt;
+            player.vy += GRAVITY * 0.75 * dt;
+            player.y += player.vy * dt;
+            if (deathTimer <= 0) {
+              if (lives > 0) {
+                respawn();
+              } else {
+                state = STATE.OVER;
+                sfx.over();
+                showGameOver();
+              }
+            }
+          }
+
+          for (const particle of particles) {
+            particle.life -= dt;
+            particle.x += particle.vx * dt;
+            particle.y += particle.vy * dt;
+            particle.vy += 420 * dt;
+          }
+          particles = particles.filter((particle) => particle.life > 0);
+          shake = Math.max(0, shake - dt * 42);
+        }
+
+        /* ------------------------------------------------------------------
+           그리기
+        ------------------------------------------------------------------ */
+        function rect(x, y, w, h, color) {
+          ctx.fillStyle = color;
+          ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+        }
+
+        function circle(x, y, r, color) {
+          ctx.fillStyle = color;
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        function drawSun(x, y, radius) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.clip();
+          rect(x - radius, y - radius, radius * 2, radius * 2, theme.soft);
+          ctx.fillStyle = theme.ink;
+          const step = 6;
+          for (let row = -radius; row < radius; row += step) {
+            for (let col = -radius; col < radius; col += step) {
+              ctx.globalAlpha = 0.22;
+              ctx.beginPath();
+              ctx.arc(x + col + (row % 12 ? 3 : 0), y + row, 0.9, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+          ctx.restore();
+          ctx.globalAlpha = 1;
+          ctx.strokeStyle = theme.ink;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        function drawCloud(x, y, scale) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.scale(scale, scale);
+          ctx.beginPath();
+          ctx.arc(0, 0, 12, Math.PI * 0.5, Math.PI * 1.5);
+          ctx.arc(12, -6, 12, Math.PI * 0.9, Math.PI * 1.9);
+          ctx.arc(24, 0, 11, Math.PI * 1.5, Math.PI * 0.5);
+          ctx.closePath();
+          ctx.fillStyle = theme.bg;
+          ctx.fill();
+          ctx.strokeStyle = theme.ink;
+          ctx.lineWidth = 1.2;
+          ctx.globalAlpha = 0.5;
+          ctx.stroke();
+          ctx.restore();
+          ctx.globalAlpha = 1;
+        }
+
+        function drawHills(factor, baseY, amp, fill) {
+          const offset = cam.x * factor;
+          ctx.beginPath();
+          ctx.moveTo(-20, H);
+          for (let x = -20; x <= W + 20; x += 8) {
+            const y =
+              baseY +
+              Math.sin((x + offset) * 0.012) * amp +
+              Math.sin((x + offset) * 0.031 + 1.7) * amp * 0.35;
+            ctx.lineTo(x, y);
+          }
+          ctx.lineTo(W + 20, H);
+          ctx.closePath();
+          ctx.fillStyle = fill;
+          ctx.fill();
+          ctx.strokeStyle = theme.ink;
+          ctx.lineWidth = 1;
+          ctx.globalAlpha = 0.35;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+
+        function drawBackdrop(now) {
+          rect(0, 0, W, H, theme.bg);
+
+          if (stage.theme === "night") {
+            stars.forEach((star) => {
+              ctx.globalAlpha = 0.35 + Math.sin(now * 0.001 + star.phase) * 0.25;
+              circle(star.x, star.y, star.r, theme.ink);
+            });
+            ctx.globalAlpha = 1;
+          }
+
+          const sunX = 392 - cam.x * 0.025;
+          drawSun(sunX, 58, 26);
+
+          if (stage.theme === "paper") {
+            drawCloud(72 - cam.x * 0.12, 52, 0.9);
+            drawCloud(296 - cam.x * 0.12, 34, 0.7);
+            drawCloud(424 - cam.x * 0.12, 76, 0.55);
+          }
+
+          drawHills(0.14, 218, 16, theme.soft);
+          drawHills(0.3, 230, 10, theme.panel);
+
+          // 낮은 안개 띠
+          rect(0, 232, W, 38, theme.halo);
+        }
+
+        function drawPit() {
+          rect(0, GROUND, stage.width, H - GROUND, theme.pit);
+          ctx.strokeStyle = theme.pitLine;
+          ctx.lineWidth = 1;
+          for (let x = 10; x < stage.width; x += 10) {
+            ctx.beginPath();
+            ctx.moveTo(x, GROUND + 1);
+            ctx.lineTo(x - 9, H);
+            ctx.stroke();
+          }
+        }
+
+        function drawGround() {
+          stage.ground.forEach(([x, w]) => {
+            rect(x, GROUND, w, H - GROUND, theme.panel);
+            rect(x, GROUND, w, 2, theme.ink);
+            ctx.strokeStyle = theme.hatch;
+            ctx.lineWidth = 1;
+            for (let i = 6; i < w; i += 11) {
+              ctx.beginPath();
+              ctx.moveTo(x + i, GROUND + 6);
+              ctx.lineTo(x + i - 7, H);
+              ctx.stroke();
+            }
+            ctx.strokeStyle = theme.ink;
+            ctx.globalAlpha = 0.35;
+            ctx.beginPath();
+            ctx.moveTo(x, GROUND);
+            ctx.lineTo(x, H);
+            ctx.moveTo(x + w, GROUND);
+            ctx.lineTo(x + w, H);
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          });
+        }
+
+        function drawPlatforms() {
+          stage.platforms.forEach(([x, y, w]) => {
+            rect(x, y, w, 10, theme.panel);
+            rect(x, y, w, 2, theme.ink);
+            ctx.strokeStyle = theme.ink;
+            ctx.lineWidth = 1;
+            ctx.strokeRect(x + 0.5, y + 0.5, w - 1, 9);
+            ctx.strokeStyle = theme.hatch;
+            for (let i = 8; i < w - 4; i += 10) {
+              ctx.beginPath();
+              ctx.moveTo(x + i, y + 4);
+              ctx.lineTo(x + i - 4, y + 9);
+              ctx.stroke();
+            }
+          });
+        }
+
+        function drawCoins(now) {
+          for (const coin of coins) {
+            if (coin.taken) continue;
+            const y = coin.y + Math.sin(now * 0.003 + coin.phase) * 2;
+            circle(coin.x, y, 4.2, theme.panel);
+            ctx.strokeStyle = theme.ink;
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.arc(coin.x, y, 4.2, 0, Math.PI * 2);
+            ctx.stroke();
+            circle(coin.x, y, 1.3, theme.ink);
+          }
+        }
+
+        function drawCheckpoint() {
+          const cp = stage.checkpoint;
+          rect(cp.x, GROUND - 36, 2, 36, theme.ink);
+          ctx.beginPath();
+          ctx.moveTo(cp.x + 2, GROUND - 36);
+          ctx.lineTo(cp.x + 16, GROUND - 32);
+          ctx.lineTo(cp.x + 2, GROUND - 27);
+          ctx.closePath();
+          ctx.fillStyle = checkpointReached ? theme.ink : theme.panel;
+          ctx.fill();
+          ctx.strokeStyle = theme.ink;
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+        }
+
+        function drawGoal(now) {
+          const g = stage.goal;
+          const pulse = 0.4 + Math.sin(now * 0.004) * 0.18;
+          ctx.globalAlpha = pulse;
+          ctx.strokeStyle = theme.ink;
+          ctx.lineWidth = 1;
+          ctx.strokeRect(g.x - 5, g.y - 5, 38, 50);
+          ctx.globalAlpha = 1;
+
+          rect(g.x, g.y, 28, 40, theme.panel);
+          ctx.strokeStyle = theme.ink;
+          ctx.lineWidth = 2;
+          ctx.strokeRect(g.x + 1, g.y + 1, 26, 38);
+
+          ctx.strokeStyle = theme.hatch;
+          ctx.lineWidth = 1;
+          for (let i = 4; i < 36; i += 7) {
+            ctx.beginPath();
+            ctx.moveTo(g.x + 3, g.y + i);
+            ctx.lineTo(g.x + 25, g.y + i);
+            ctx.stroke();
+          }
+
+          // 화살표
+          ctx.strokeStyle = theme.ink;
+          ctx.lineWidth = 2;
+          const arrowX = g.x + 14 + Math.sin(now * 0.006) * 2;
+          ctx.beginPath();
+          ctx.moveTo(arrowX - 4, g.y + 16);
+          ctx.lineTo(arrowX, g.y + 20);
+          ctx.lineTo(arrowX - 4, g.y + 24);
+          ctx.stroke();
+
+          rect(g.x - 5, g.y - 14, 38, 11, theme.ink);
+          ctx.fillStyle = theme.bg;
+          ctx.font = "6px 'IBM Plex Mono', monospace";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("EXIT", g.x + 14, g.y - 8.5);
+          ctx.textAlign = "left";
+          ctx.textBaseline = "alphabetic";
+        }
+
+        function drawEnemy(enemy) {
+          if (!enemy.alive) return;
+          const wobble = Math.sin(enemy.phase) * 0.09;
+          ctx.save();
+          ctx.translate(enemy.x + enemy.w / 2, enemy.y + enemy.h / 2);
+          ctx.scale(1 + wobble, 1 - wobble);
+          circle(0, 0, 7, theme.ink);
+          rect(-7, 2, 14, 4, theme.ink);
+          circle(-2.6, -1.6, 1.5, theme.bg);
+          circle(2.6, -1.6, 1.5, theme.bg);
+          rect(-2.9, -1.9, 0.8, 0.8, theme.ink);
+          rect(2.3, -1.9, 0.8, 0.8, theme.ink);
+          ctx.restore();
+        }
+
+        function drawPlayer(now) {
+          if (!player) return;
+          if (player.invuln > 0 && Math.floor(player.invuln * 14) % 2 === 0) return;
+          const p = player;
+          const squash = p.squash || 0;
+          ctx.save();
+          ctx.translate(Math.round(p.x + p.w / 2), Math.round(p.y + p.h));
+          ctx.scale(1 + squash * 0.18, 1 - squash * 0.18);
+          ctx.scale(p.facing || 1, 1);
+
+          const ink = theme.ink;
+          const bg = theme.bg;
+          const run = p.onGround && Math.abs(p.vx) > 12;
+          const stride = run ? Math.sin(p.anim * Math.PI * 2) * 2.6 : 0;
+          const flap = Math.sin(now * 0.012 + p.x * 0.04) * 2;
+
+          // 스카프
+          ctx.strokeStyle = ink;
+          ctx.lineWidth = 2;
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          ctx.moveTo(-3, -11);
+          ctx.quadraticCurveTo(-9, -13 + flap, -13, -9 + flap);
+          ctx.stroke();
+
+          // 다리
+          rect(-5 + stride, -4, 3, 4, ink);
+          rect(2 - stride, -4, 3, 4, ink);
+
+          // 몸
+          ctx.beginPath();
+          ctx.moveTo(-5, -12);
+          ctx.lineTo(5, -12);
+          ctx.lineTo(4, -3);
+          ctx.lineTo(-4, -3);
+          ctx.closePath();
+          ctx.fillStyle = ink;
+          ctx.fill();
+
+          // 머리
+          circle(0, -14.5, 4.6, ink);
+          circle(2, -15.5, 1.4, bg);
+
+          ctx.restore();
+        }
+
+        function drawParticles() {
+          for (const particle of particles) {
+            ctx.globalAlpha = clamp(particle.life / particle.max, 0, 1);
+            rect(particle.x, particle.y, particle.size, particle.size, theme.ink);
+          }
+          ctx.globalAlpha = 1;
+        }
+
+        function draw(now) {
+          ctx.save();
+          if (shake > 0 && !reduceMotion) {
+            ctx.translate((Math.random() * 2 - 1) * shake, (Math.random() * 2 - 1) * shake);
+          }
+          drawBackdrop(now);
+
+          ctx.save();
+          ctx.translate(-Math.round(cam.x), 0);
+          drawPit();
+          drawGround();
+          drawPlatforms();
+          drawCheckpoint();
+          drawGoal(now);
+          drawCoins(now);
+          enemies.forEach(drawEnemy);
+          drawParticles();
+          drawPlayer(now);
+          ctx.restore();
+
+          // 스캔라인 느낌의 얇은 선
+          ctx.globalAlpha = 0.03;
+          ctx.strokeStyle = theme.ink;
+          ctx.lineWidth = 1;
+          for (let y = 2; y < H; y += 5) {
+            ctx.beginPath();
+            ctx.moveTo(0, y + 0.5);
+            ctx.lineTo(W, y + 0.5);
+            ctx.stroke();
+          }
+          ctx.globalAlpha = 1;
+          ctx.restore();
+        }
+
+        /* ------------------------------------------------------------------
+           루프
+        ------------------------------------------------------------------ */
+        function loop(now) {
+          if (!last) last = now;
+          const dt = Math.min(0.033, (now - last) / 1000);
+          last = now;
+          update(dt);
+          draw(now);
+          raf = requestAnimationFrame(loop);
+        }
+
+        /* ------------------------------------------------------------------
+           초기화
+        ------------------------------------------------------------------ */
+        syncSound();
+        syncBest();
+        loadStage(0, false, false);
+        state = STATE.TITLE;
+        showTitle();
+        updateHud();
+        draw(performance.now());
+        raf = requestAnimationFrame(loop);
+
+        // 테스트용 훅 — ?test=1 일 때만 열립니다.
+        if (new URLSearchParams(location.search).has("test")) {
+          window.__MONO = {
+            get state() {
+              return state;
+            },
+            get stage() {
+              return stageIndex;
+            },
+            get score() {
+              return score;
+            },
+            get lives() {
+              return lives;
+            },
+            get player() {
+              return player
+                ? {
+                    x: player.x,
+                    y: player.y,
+                    vx: player.vx,
+                    vy: player.vy,
+                    onGround: player.onGround,
+                  }
+                : null;
+            },
+            start: startRun,
+            warp(x, y) {
+              if (!player) return;
+              player.x = x;
+              player.y = y;
+              player.vx = 0;
+              player.vy = 0;
+            },
+            finish() {
+              if (!player) return;
+              player.x = stage.goal.x + 4;
+              player.y = stage.goal.y + 4;
+              player.vx = 0;
+              player.vy = 0;
+            },
+            damage() {
+              if (state === STATE.PLAY) killPlayer();
+            },
+            setLives(value) {
+              lives = value;
+              updateHud();
+            },
+            world() {
+              return {
+                goal: stage.goal.x,
+                width: stage.width,
+                ground: stage.ground.map(([x, w]) => ({ x, w })),
+                enemies: enemies
+                  .filter((enemy) => enemy.alive)
+                  .map((enemy) => ({ x: enemy.x, y: enemy.y, w: enemy.w, h: enemy.h })),
+                platforms: stage.platforms.map(([x, y, w]) => ({ x, y, w, h: 10 })),
+              };
+            },
+          };
+        }
+      })();
+    </script>
+  </body>
+</html>

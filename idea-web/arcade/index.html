@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>아케이드 10 · 신박랩</title>
+    <meta
+      name="description"
+      content="테트리스, 벽돌깨기, 뱀, 퐁, 플래피, 2048, 지뢰찾기, 우주 침공, 개구리 건너기, 사이먼까지. 유명 게임 10종을 한 페이지에서."
+    />
+    <meta name="theme-color" content="#f2ede2" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f2ede2'/%3E%3Crect x='4' y='4' width='24' height='6' fill='%23d8402a'/%3E%3Crect x='4' y='13' width='24' height='6' fill='%2317140e'/%3E%3Crect x='4' y='22' width='24' height='6' fill='%2317140e'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/arcade.css" />
+  </head>
+  <body>
+    <header class="ah">
+      <div class="wrap ah-inner">
+        <div class="ah-left">
+          <a class="ah-back" href="../">← 티어표</a>
+          <span class="ah-brand">신박랩 아케이드</span>
+        </div>
+        <div class="ah-right">
+          <a class="ah-link" href="game.html">흑백 점프</a>
+          <button class="ah-sound" type="button" id="sound" aria-pressed="true">소리 끄기</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap am">
+      <section class="ah-hero">
+        <span class="ah-kicker mono">10 GAMES · 1-BIT · NO INSTALL</span>
+        <h1 class="ah-title">유명 게임 <em>10</em></h1>
+        <p class="ah-lede">
+          블록 쌓기부터 지뢰찾기까지, 브라우저에서 바로 플레이하세요.
+        </p>
+        <div class="ah-meta">
+          <span class="badge">10 게임</span>
+          <span class="badge">키보드 · 터치</span>
+          <span class="badge">최고 기록 저장</span>
+        </div>
+      </section>
+
+      <section class="grid" id="grid" aria-label="게임 목록"></section>
+
+      <a class="bonus" href="game.html">
+        <span class="mono">BONUS</span>
+        <strong>흑백 점프</strong>
+        <span>2 스테이지 플랫포머 · 지난주에 만든 게임</span>
+        <span class="bonus-go">플레이 →</span>
+      </a>
+
+      <section class="stage" id="stage" hidden aria-label="게임 플레이">
+        <div class="stage-bar">
+          <button class="stage-back" type="button" id="stage-back">← 목록</button>
+          <span class="mono" id="stage-index">01</span>
+          <span class="mono" id="stage-genre"></span>
+        </div>
+        <div class="stage-head">
+          <div>
+            <h2 class="stage-title" id="stage-title"></h2>
+            <p class="stage-origin" id="stage-origin"></p>
+          </div>
+          <div class="stage-hud">
+            <span><i id="hud-label">점수</i> <b id="stage-score">0</b></span>
+            <span>최고 <b id="stage-best">0</b></span>
+          </div>
+        </div>
+        <div class="stage-body" id="stage-body"></div>
+        <p class="stage-controls" id="stage-controls"></p>
+        <div class="stage-foot">
+          <button class="btn" type="button" id="stage-restart">다시 시작</button>
+          <button class="btn btn--primary" type="button" id="stage-next">다음 게임</button>
+          <a class="btn" href="game.html">보너스: 흑백 점프</a>
+        </div>
+      </section>
+
+      <p class="notice">
+        모든 게임은 원작의 규칙만 참고해 새로 만든 오마주입니다. 그래픽과 효과음은 코드로 구현했습니다. 원작과 제휴 관계가 없습니다. 기록은 이 브라우저에만 저장됩니다.
+      </p>
+    </main>
+
+    <footer class="af wrap">
+      <p>SHINBAK-LAB / ARCADE / 2026</p>
+      <p><a href="../">티어표로 돌아가기</a></p>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/arcade/core.js"></script>
+    <script src="assets/js/arcade/tetris.js"></script>
+    <script src="assets/js/arcade/breakout.js"></script>
+    <script src="assets/js/arcade/snake.js"></script>
+    <script src="assets/js/arcade/pong.js"></script>
+    <script src="assets/js/arcade/flappy.js"></script>
+    <script src="assets/js/arcade/g2048.js"></script>
+    <script src="assets/js/arcade/mines.js"></script>
+    <script src="assets/js/arcade/invaders.js"></script>
+    <script src="assets/js/arcade/frogger.js"></script>
+    <script src="assets/js/arcade/simon.js"></script>
+  </body>
+</html>

@@ -218,5 +218,49 @@
     "ink": "#213f38",
     "accent": "#c7e64b",
     "theme": "commuter"
+  },
+  {
+    "id": "vu",
+    "brand": "REEL / VU",
+    "category": "빈티지 오디오",
+    "path": "vu.html",
+    "description": "레트로 오디오 레벨과 무음 메트로놈을 오가는 호박빛 원형 시안.",
+    "bg": "#373025",
+    "ink": "#fff2d4",
+    "accent": "#ffb340",
+    "theme": "watch-face"
+  },
+  {
+    "id": "melon",
+    "brand": "MELON / 60",
+    "category": "시계 · 타이머",
+    "path": "melon.html",
+    "description": "코럴과 노랑 숫자로 시간을 보고, 같은 화면에서 1분 타이머를 시작합니다.",
+    "bg": "#1d2b53",
+    "ink": "#fff4db",
+    "accent": "#ff6b57",
+    "theme": "watch-face"
+  },
+  {
+    "id": "teletext",
+    "brand": "TELETEXT / 18",
+    "category": "날씨 · 일정",
+    "path": "teletext.html",
+    "description": "민트색 정보 레일의 날씨와 파란 레일의 일정을 번갈아 확인합니다.",
+    "bg": "#162426",
+    "ink": "#e7fff7",
+    "accent": "#00e5a8",
+    "theme": "watch-face"
+  },
+  {
+    "id": "night",
+    "brand": "NIGHT / FIELD",
+    "category": "별자리 · 나침반",
+    "path": "night.html",
+    "description": "별자리와 방위 눈금을 그대로 두고 인디고와 크림슨으로 바꿉니다.",
+    "bg": "#111629",
+    "ink": "#eef7ff",
+    "accent": "#7dd3fc",
+    "theme": "watch-face"
   }
 ]

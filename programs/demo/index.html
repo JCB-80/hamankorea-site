@@ -44,6 +44,14 @@ button.secondary{background:white;color:var(--accent)}button:disabled{opacity:.5
 #demo-schedule,#demo-reddit{scroll-margin-top:12px}
 @media(max-width:700px){.quick-grid{grid-template-columns:minmax(0,1fr)}.demo-jump{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.demo-jump a{padding-inline:5px;text-align:center}}
 .quick .split{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:350px){.quick .split{grid-template-columns:1fr}}
+
+.hazza-filter{min-inline-size:0;margin:10px 0;padding:9px 10px 0;border:1px solid var(--line);border-radius:9px}
+.hazza-filter legend{font-weight:800;padding:0 5px}.hazza-ranges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 11px;margin:5px 0}
+.hazza-param{min-width:0;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:0 6px}
+.hazza-param label{margin:5px 0;font-size:.82rem;line-height:1.3}
+.hazza-param span{font-size:.82rem;font-weight:700;white-space:nowrap;color:var(--accent);font-variant-numeric:tabular-nums}
+.hazza-param input[type=range]{grid-column:1/-1;min-width:0;padding:0;border:0;background:transparent;accent-color:var(--accent);cursor:pointer;margin:0}
+@media(max-width:850px){.hazza-ranges{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -88,6 +96,18 @@ button.secondary{background:white;color:var(--accent)}button:disabled{opacity:.5
  <p>유튜브 실제 검색·다운로드, Google Drive 가져오기, 파일 업로드는 연결되지 않았습니다.</p>
  <div class="hazza-grid">
   <div><h3>후보 선별 예시</h3><p>실제 채널·영상과 무관한 예시 데이터입니다.</p>
+  <fieldset class="hazza-filter"><legend>수집 조건 필터</legend>
+<p>가상 후보만 비교합니다. 통과하더라도 원본을 입수하거나 재사용할 권한이 생기지 않습니다.</p>
+<div class="hazza-ranges">
+<div class="hazza-param"><label for="hazza-young">게시 후 최소 경과일</label><span id="hazza-young-val" aria-hidden="true">60일</span><input id="hazza-young" type="range" min="0" max="730" step="1" value="60"></div>
+<div class="hazza-param"><label for="hazza-old">게시 후 최대 경과일</label><span id="hazza-old-val" aria-hidden="true">365일</span><input id="hazza-old" type="range" min="0" max="730" step="1" value="365"></div>
+<div class="hazza-param"><label for="hazza-views">최소 조회수</label><span id="hazza-views-val" aria-hidden="true">500,000회</span><input id="hazza-views" type="range" min="0" max="2000000" step="10000" value="500000"></div>
+<div class="hazza-param"><label for="hazza-subs">최대 구독자 수</label><span id="hazza-subs-val" aria-hidden="true">100,000명</span><input id="hazza-subs" type="range" min="0" max="300000" step="1000" value="100000"></div>
+<div class="hazza-param"><label for="hazza-ratio">조회수 ÷ 구독자 최소 배수</label><span id="hazza-ratio-val" aria-hidden="true">3배</span><input id="hazza-ratio" type="range" min="0" max="15" step="0.1" value="3"></div>
+<div class="hazza-param"><label for="hazza-comments">최근 14일 댓글 수 상한</label><span id="hazza-comments-val" aria-hidden="true">3개</span><input id="hazza-comments" type="range" min="0" max="25" step="1" value="3"></div>
+</div>
+<div class="actions"><button type="button" class="secondary" id="hazza-filter-reset">기본값으로</button></div>
+</fieldset>
   <div class="actions"><button type="button" class="secondary" id="hazza-candidates">예시 후보 확인</button></div>
   <output id="hazza-filter-status" aria-live="polite"></output><ul id="hazza-fixtures" class="list"></ul></div>
   <div><h3>내 MP4 미리보기</h3><label for="hazza-file">본인·허가받은 MP4 선택 (최대 100MB)</label>
@@ -182,27 +202,49 @@ by("copy").addEventListener("click",async()=>{
  catch{by("result").focus();by("result").select();by("draft-status").textContent="선택된 요청문을 직접 복사하세요.";}
 });
 
+
+const hazzaRanges={"young":{"start":60,"unit":"일"},"old":{"start":365,"unit":"일"},"views":{"start":500000,"unit":"회"},"subs":{"start":100000,"unit":"명"},"ratio":{"start":3,"unit":"배"},"comments":{"start":3,"unit":"개"}};
+const hazzaKeys=Object.keys(hazzaRanges);
+const hazzaFormat=new Intl.NumberFormat("ko-KR",{maximumFractionDigits:1});
+const hazzaN=v=>hazzaFormat.format(v);
 const fixtureRows=[
  {title:"예시 01 · 고양이의 엉뚱한 착지",age:120,views:820000,subs:64000,comments:2},
  {title:"예시 02 · 자꾸 움직이는 의자",age:34,views:520000,subs:150000,comments:4},
  {title:"예시 03 · 나무 블록 반전",age:180,views:203000,subs:81000,comments:0}
 ];
-by("hazza-candidates").addEventListener("click",()=>{
+function filterHazza(changed){
+ const input=key=>by("hazza-"+key);
+ if(Number(input("young").value)>Number(input("old").value)){
+  if(changed==="old")input("old").value=input("young").value;
+  else input("young").value=input("old").value;
+ }
+ const c=Object.fromEntries(hazzaKeys.map(key=>[key,Number(input(key).value)]));
+ for(const key of hazzaKeys){
+  const label=hazzaN(c[key])+hazzaRanges[key].unit;
+  by("hazza-"+key+"-val").textContent=label;input(key).setAttribute("aria-valuetext",label);
+ }
  const list=by("hazza-fixtures");list.replaceChildren();let count=0;
  for(const row of fixtureRows){
   const reasons=[];
-  if(row.age<60||row.age>365)reasons.push("게시 60~365일 범위 밖");
-  if(row.views<500000)reasons.push("조회 50만 회 미만");
-  if(row.subs>100000)reasons.push("구독자 10만 명 초과");
-  if(row.views<row.subs*3)reasons.push("조회수 ÷ 구독자 3배 미만");
-  if(row.comments>3)reasons.push("최근 확인 댓글 3개 초과");
+  if(row.age<c.young||row.age>c.old)reasons.push("게시 "+hazzaN(row.age)+"일은 "+hazzaN(c.young)+"~"+hazzaN(c.old)+"일 범위 밖");
+  if(row.views<c.views)reasons.push("조회 "+hazzaN(row.views)+"회는 기준 "+hazzaN(c.views)+"회 미만");
+  if(row.subs>c.subs)reasons.push("구독자 "+hazzaN(row.subs)+"명은 기준 "+hazzaN(c.subs)+"명 초과");
+  if(row.views*10<row.subs*Math.round(c.ratio*10))reasons.push("조회수 ÷ 구독자 "+hazzaN(row.views/row.subs)+"배(표시 반올림)는 기준 "+hazzaN(c.ratio)+"배 미만");
+  if(row.comments>c.comments)reasons.push("최근 14일 댓글 "+hazzaN(row.comments)+"개는 기준 "+hazzaN(c.comments)+"개 초과");
   if(!reasons.length)count++;
   const li=document.createElement("li");
   li.textContent=row.title+" · "+(reasons.length?"미통과: "+reasons.join(", "):"통과 (예시)");
   list.append(li);
  }
- by("hazza-filter-status").textContent="기본 기준: 가상 후보 "+fixtureRows.length+"건 중 "+count+"건 통과. 실제 검색 결과가 아닙니다.";
+ by("hazza-filter-status").textContent="가상 후보 "+fixtureRows.length+"건 중 "+count+"건 통과. 실제 검색 결과가 아닙니다.";
+}
+for(const key of hazzaKeys)by("hazza-"+key).addEventListener("input",()=>filterHazza(key));
+by("hazza-candidates").addEventListener("click",()=>filterHazza());
+by("hazza-filter-reset").addEventListener("click",()=>{
+ for(const key of hazzaKeys)by("hazza-"+key).value=String(hazzaRanges[key].start);
+ filterHazza();
 });
+filterHazza();
 const localFile=by("hazza-file"), localPreview=by("hazza-video"), localClear=by("hazza-clear");
 let previewUrl=null, loadGeneration=0;
 const reportLocal=msg=>{by("hazza-file-status").textContent=msg;};

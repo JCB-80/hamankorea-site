@@ -35,7 +35,7 @@ function hkPageHeader(){
  return (0,j.jsxs)('header',{className:'hk-page-header',children:[
    (0,j.jsx)('a',{href:'/',className:'hk-page-brand',children:'HAMAN KOREA'}),
    (0,j.jsx)('a',{href:'/contact/',className:'hk-contact-cta','aria-current':current('/contact/')?'page':undefined,style:{display:'inline-flex',alignItems:'center',justifyContent:'center',minHeight:44,padding:'0 16px',marginInlineStart:'auto',border:'1px solid #141413',borderRadius:6,background:'#141413',color:'#fff',textDecoration:'none',fontSize:13,fontWeight:700,whiteSpace:'nowrap'},children:'문의하기'}),
-   (0,j.jsxs)('nav',{'aria-label':'주요 메뉴',className:'hk-page-nav',onKeyDown:closeWithEscape,children:[group('웹',web),group('앱',apps),...more.map(([label,href])=>link(label,href))]})
+   (0,j.jsxs)('nav',{'aria-label':'주요 메뉴',className:'hk-page-nav',onKeyDown:closeWithEscape,children:[group('웹',web),...[...apps,...more].map(([label,href])=>link(label,href))]})
  ]});
 }
 document.addEventListener('pointerdown',event=>{

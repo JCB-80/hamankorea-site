@@ -1,6 +1,6 @@
 /* Real static entry routes with legacy fragment compatibility. Runs before React. */
 (()=>{
- const paths={'/':'home','/index.html':'home','/portfolio/':'portfolio','/apps/':'apps','/products/':'products','/detail-pages/':'details','/services/':'services','/contact/':'contact'};
+ const paths={'/':'home','/index.html':'home','/portfolio/':'portfolio','/apps/':'apps','/products/':'products','/detail-pages/':'details','/services/':'services','/contact/':'contact','/fit/':'fit'};
  const path=location.pathname.replace(/index\.html$/,'');
  const legacy={'products':'/products/','signature-edition-section':'/portfolio/','gallery-workspace':'/portfolio/','app-section':'/apps/','galaxy-app-section':'/apps/','isafe-section':'/apps/','pdp-showcase-section':'/detail-pages/','four-services-section':'/services/','game-development':'/services/','development-inquiry':'/contact/','selected-work':'/','top':'/'};
  let hash;try{hash=decodeURIComponent(location.hash.slice(1))}catch{hash=''}

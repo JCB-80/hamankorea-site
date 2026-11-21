@@ -26,7 +26,7 @@ function hkPageHeader(){
  ]},label);
  const web=[['아이디어웹','/idea-web/'],['3D 웹 시안','/web-samples/3d/'],['게임','/idea-web/game.html'],['업종별 시안','/industries/'],['웹 갤러리','/portfolio/'],['상품 상세페이지 시안','/detail-pages/']];
  const apps=[['모바일 앱 시안','/apps/'],['I-SAFE','/isafe/'],['워치 디자인','/web-samples/watch/']];
- const more=[['제품','/products/'],['5대 서비스','/services/'],...(onHome?[['작업방','/workroom/'],['프로그램','/programs/']]:[]),['구상하기','/quote-wireframe/#/build']];
+ const more=[['제품','/products/'],['5대 서비스','/services/'],...(onHome?[['작업방','/workroom/'],['프로그램','/programs/']]:[]),['구상하기','/quote-wireframe/#/build'],['FIT','/fit/']];
  const closeWithEscape=event=>{
    if(event.key!=='Escape')return;
    const detail=event.currentTarget.querySelector('details[open]');

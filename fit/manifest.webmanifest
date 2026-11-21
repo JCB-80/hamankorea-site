@@ -1,0 +1,15 @@
+{
+  "name": "FITROOM · AI 의상 코디 스튜디오",
+  "short_name": "FITROOM",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF9F7",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

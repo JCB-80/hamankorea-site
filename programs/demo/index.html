@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; connect-src 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; connect-src 'none'; media-src blob:; object-src 'none'">
 <title>SNS 작업실 체험판 | 하만코리아</title>
 <style>
 :root{color-scheme:light;--ink:#152523;--muted:#526360;--accent:#145b4d;--line:#d7e1db;--paper:#f4f7f3}*{box-sizing:border-box}
@@ -26,6 +26,16 @@ button.secondary{background:white;color:var(--accent)}button:disabled{opacity:.5
 #result{min-height:148px}.notice{font-size:.8rem;margin-bottom:24px}
 @media(max-width:700px){.layout{grid-template-columns:1fr}.hero{padding-top:25px}.card{padding:16px}}
 @media(max-width:350px){.split{grid-template-columns:1fr}}
+
+.hazza{margin-bottom:16px;scroll-margin-top:18px}.hazza-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hazza h3{margin:0;font-size:1rem}.hazza-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:14px}
+.hazza-grid>div{min-width:0;border:1px solid var(--line);border-radius:11px;padding:12px}
+.hazza input[type=file]{min-width:0;max-width:100%;font-size:.85rem}
+.hazza video{display:block;width:100%;max-height:260px;background:#152523;border-radius:9px;margin-top:8px}
+.hazza video[hidden]{display:none}
+#hazza-file-status{overflow-wrap:anywhere}
+.jump-hazza{display:inline-flex;min-height:44px;align-items:center;margin-top:6px;font-weight:750}
+@media(max-width:700px){.hazza-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -36,6 +46,22 @@ button.secondary{background:white;color:var(--accent)}button:disabled{opacity:.5
 <h1>SNS 작업실 체험판</h1>
 <p>로그인 없이 제작 일정을 짜고 레딧용 초안 양식을 만들어보세요. 이 화면은 테스트 전용이며 계정 연결, 자동 게시, 서버 저장은 하지 않습니다.</p>
 <div class="status"><span class="badge">로그인 없음</span><span class="badge">실제 게시 꺼짐</span><span class="badge">예시 데이터</span></div>
+</section>
+<section class="card hazza" id="hazza" aria-labelledby="hazza-heading">
+ <div class="hazza-title"><h2 id="hazza-heading">해짜 소스 가져오기</h2><span class="badge">로컬 체험</span></div>
+ <p>가상 후보로 선별 결과를 확인하고, 직접 촬영했거나 재사용 허락을 받은 MP4는 이 탭에서 미리 볼 수 있습니다.</p>
+ <p>유튜브 실제 검색·다운로드, Google Drive 가져오기, 파일 업로드는 연결되지 않았습니다.</p>
+ <div class="hazza-grid">
+  <div><h3>후보 선별 예시</h3><p>실제 채널·영상과 무관한 예시 데이터입니다.</p>
+  <div class="actions"><button type="button" class="secondary" id="hazza-candidates">예시 후보 확인</button></div>
+  <output id="hazza-filter-status" aria-live="polite"></output><ul id="hazza-fixtures" class="list"></ul></div>
+  <div><h3>내 MP4 미리보기</h3><label for="hazza-file">본인·허가받은 MP4 선택 (최대 100MB)</label>
+  <input id="hazza-file" type="file" accept="video/mp4,.mp4" aria-describedby="hazza-local">
+  <p id="hazza-local">선택한 영상은 기기 밖으로 보내거나 저장하지 않습니다.</p>
+  <video id="hazza-video" controls playsinline preload="metadata" hidden aria-label="로컬 영상 미리보기"></video>
+  <div class="actions"><button id="hazza-clear" type="button" class="secondary" disabled>선택한 파일 비우기</button></div>
+  <output id="hazza-file-status" aria-live="polite"></output></div>
+ </div>
 </section>
 <div class="layout">
 <div class="column">
@@ -120,6 +146,79 @@ by("copy").addEventListener("click",async()=>{
  try{await navigator.clipboard.writeText(by("result").value);by("draft-status").textContent="요청문을 복사했습니다.";}
  catch{by("result").focus();by("result").select();by("draft-status").textContent="선택된 요청문을 직접 복사하세요.";}
 });
+
+const fixtureRows=[
+ {title:"예시 01 · 고양이의 엉뚱한 착지",age:120,views:820000,subs:64000,comments:2},
+ {title:"예시 02 · 자꾸 움직이는 의자",age:34,views:520000,subs:150000,comments:4},
+ {title:"예시 03 · 나무 블록 반전",age:180,views:203000,subs:81000,comments:0}
+];
+by("hazza-candidates").addEventListener("click",()=>{
+ const list=by("hazza-fixtures");list.replaceChildren();let count=0;
+ for(const row of fixtureRows){
+  const reasons=[];
+  if(row.age<60||row.age>365)reasons.push("게시 60~365일 범위 밖");
+  if(row.views<500000)reasons.push("조회 50만 회 미만");
+  if(row.subs>100000)reasons.push("구독자 10만 명 초과");
+  if(row.views<row.subs*3)reasons.push("조회수 ÷ 구독자 3배 미만");
+  if(row.comments>3)reasons.push("최근 확인 댓글 3개 초과");
+  if(!reasons.length)count++;
+  const li=document.createElement("li");
+  li.textContent=row.title+" · "+(reasons.length?"미통과: "+reasons.join(", "):"통과 (예시)");
+  list.append(li);
+ }
+ by("hazza-filter-status").textContent="기본 기준: 가상 후보 "+fixtureRows.length+"건 중 "+count+"건 통과. 실제 검색 결과가 아닙니다.";
+});
+const localFile=by("hazza-file"), localPreview=by("hazza-video"), localClear=by("hazza-clear");
+let previewUrl=null, loadGeneration=0;
+const reportLocal=msg=>{by("hazza-file-status").textContent=msg;};
+function releasePreview(){
+ const prior=previewUrl;previewUrl=null;
+ if(prior){
+  localPreview.pause();localPreview.removeAttribute("src");localPreview.load();URL.revokeObjectURL(prior);
+ }
+ localPreview.hidden=true;
+}
+function clearLocal(message=""){
+ ++loadGeneration;
+ releasePreview();localFile.value="";localClear.disabled=true;reportLocal(message);
+}
+async function looksLikeMp4(file){
+ const h=new Uint8Array(await file.slice(0,64).arrayBuffer());
+ // Standard MP4 first box; accept a missing OS MIME only if the file has the MP4 container signature.
+ return h.length>=12&&h[4]===0x66&&h[5]===0x74&&h[6]===0x79&&h[7]===0x70;
+}
+localFile.addEventListener("change",async()=>{
+ const slot=++loadGeneration; releasePreview();localClear.disabled=true;
+ const file=localFile.files?.[0];
+ if(!file){reportLocal("");return;}
+ if(!/\.mp4$/i.test(file.name)||(file.type&&file.type.toLowerCase()!=="video/mp4")){
+  clearLocal("MP4 동영상만 선택할 수 있습니다.");return;
+ }
+ if(file.size<12||file.size>100000000){clearLocal("비어 있지 않은 100MB 이하의 MP4를 선택하세요.");return;}
+ localClear.disabled=false; reportLocal("기기에서 영상 형식을 확인하는 중입니다.");
+ try{
+  const matching=await looksLikeMp4(file);
+  if(slot!==loadGeneration)return;
+  if(!matching){clearLocal("MP4 파일로 확인되지 않아 열지 않았습니다.");return;}
+  previewUrl=URL.createObjectURL(file);
+  localPreview.hidden=false;localPreview.src=previewUrl;
+  reportLocal("이 기기에서 미리보기를 불러오는 중입니다.");
+ }catch{
+  if(slot===loadGeneration)clearLocal("파일을 읽을 수 없습니다. 원본 MP4를 다시 선택하세요.");
+ }
+});
+localPreview.addEventListener("loadedmetadata",()=>{
+ if(previewUrl&&localPreview.currentSrc===previewUrl&&localPreview.readyState>=1){
+  reportLocal("미리보기 준비 완료. 재생을 눌러 확인하세요. 파일은 전송하지 않았습니다.");
+ }
+});
+localPreview.addEventListener("error",()=>{
+ if(previewUrl&&localPreview.currentSrc===previewUrl&&localPreview.error){
+  clearLocal("이 브라우저에서 재생할 수 없습니다. H.264/AAC MP4를 사용해 보세요.");
+ }
+});
+localClear.addEventListener("click",()=>clearLocal("선택한 파일을 비웠습니다."));
+window.addEventListener("pagehide",()=>clearLocal());
 </script>
 </body>
 </html>

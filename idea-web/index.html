@@ -6,7 +6,7 @@
     <title>아이디어웹 · 신박랩 | 하만코리아</title>
     <meta
       name="description"
-      content="영상에서 소개한 신박한 웹사이트 19곳과 번외 4곳의 기능을 브라우저에서 직접 체험할 수 있게 다시 만든 티어표."
+      content="아이디어웹 · 브라우저에서 직접 열어 보는 신박랩의 웹 체험 프로젝트."
     />
     <meta name="theme-color" content="#f2ede2" />
     <link
@@ -4821,7 +4821,6 @@ pre {
         </a>
         <nav class="site-nav" aria-label="주요 메뉴">
           <a href="/">하만코리아</a>
-          <a href="#table">티어표</a>
           <a href="#notes">제작 노트</a>
           <a href="#how">실행 안내</a>
         </nav>
@@ -4837,21 +4836,14 @@ pre {
     <main id="main">
       <p class="wrap" style="padding-block:12px;font-size:14px;line-height:1.6">아이디어웹 · 독립적으로 만든 체험용 데모입니다. 원본 서비스와 제휴 관계가 없으며 실제 결제는 이루어지지 않습니다. 실제 카드번호·비밀번호·개인정보는 입력하지 마세요.</p>
       <div class="view" id="home">
-        <section class="table-section wrap" id="table" aria-labelledby="table-title">
+        <section class="table-section wrap" aria-labelledby="ideas-title">
           <div class="section-head">
-            <div class="stack" style="gap: 6px">
-              <h1 id="table-title">티어표</h1>
-              <p>영상의 기준은 하나, “바이브코딩할 때 참고하고 싶은 정도”.</p>
-            </div>
-            <div class="section-actions">
-              <button class="btn btn--sm" type="button" data-random>무작위 체험</button>
-              <button class="btn btn--sm btn--ghost" type="button" data-open-palette>
-                이름으로 찾기
-              </button>
-            </div>
+            <h1 id="ideas-title">아이디어웹</h1>
+            <nav class="section-actions" aria-label="아이디어웹 체험">
+              <a class="btn btn--sm btn--ghost" href="./arcade/">아케이드 게임 10종</a>
+              <button class="btn btn--sm btn--ghost" type="button" data-open-palette>이름으로 찾기</button>
+            </nav>
           </div>
-          <nav class="section-actions" aria-label="아이디어웹 바로가기" style="margin-block: 0 16px"><a class="btn btn--sm btn--ghost" href="./game.html">흑백 점프 플레이</a><a class="btn btn--sm btn--ghost" href="./arcade/">아케이드 게임 10종</a><a class="btn btn--sm" href="/workroom/">작업방</a></nav>
-          <div id="tiers"></div>
         </section>
 
         <section class="notes wrap" id="notes" aria-labelledby="notes-title">
@@ -4952,7 +4944,7 @@ pre {
     <footer class="site-foot">
       <div class="wrap foot-inner">
         <p>
-          신박랩은 혼잡스의 영상 「신박한 웹사이트 티어표」에서 소개된 사이트들의 아이디어를
+          신박랩은 혼잡스의 영상에서 소개된 사이트들의 아이디어를
           참고해 만든 개인 프로젝트입니다. 원본 사이트와 제휴 관계가 없으며, 상표와 디자인은
           각 소유자에게 있습니다.
         </p>
@@ -11599,7 +11591,6 @@ window.LAB.palette = (function () {
           style: { "--tier": tier.color },
           dataset: { id: app.id },
         },
-        el("span", { class: "p-tier", text: tier.no }),
         el("span", { class: "p-name", text: app.name }),
         el("span", { class: "p-tag", text: app.tag })
       );
@@ -11703,105 +11694,16 @@ window.LAB.palette = (function () {
 (function () {
   "use strict";
 
-  const { el, clear, fmt, pick, toast, icon } = window.UI;
+  const { el, clear, toast, icon } = window.UI;
   const LAB = window.LAB;
   const baseTitle = document.title;
   const home = document.getElementById("home");
   const appView = document.getElementById("app");
-  const tiersHost = document.getElementById("tiers");
 
   let cleanup = null;
   let currentId = null;
 
   const pad = (n) => String(n).padStart(2, "0");
-
-  function cardFor(app) {
-    const tier = LAB.tierOf(app);
-    return el(
-      "a",
-      {
-        class: "card",
-        href: `#/a/${app.id}`,
-        style: { "--tier": tier.color },
-        dataset: { app: app.id },
-      },
-      el("span", { class: "card-no", text: pad(app.position) }),
-      el("span", { class: "card-tag", text: app.tag }),
-      el("span", { class: "card-name", text: app.name }),
-      el("span", { class: "card-blurb", text: app.blurb }),
-      el("span", { class: "card-go", text: "체험" })
-    );
-  }
-
-  function featureFor(app) {
-    const tier = LAB.tierOf(app);
-    const row = (label, keys) =>
-      el(
-        "div",
-        { class: "feature-keys-row" },
-        el("span", { text: label }),
-        el("span", {}, ...keys.map((key) => el("span", { class: "kbd", text: key })))
-      );
-    return el(
-      "a",
-      {
-        class: "card card--feature",
-        href: `#/a/${app.id}`,
-        style: { "--tier": tier.color },
-        dataset: { app: app.id },
-      },
-      el(
-        "div",
-        { class: "feature-main" },
-        el("span", { class: "card-tag", text: `${tier.name} · ${app.tag}` }),
-        el("span", { class: "card-name", text: app.name }),
-        el("span", { class: "card-blurb", text: app.blurb }),
-        el("span", { class: "card-go", text: "체험" })
-      ),
-      el(
-        "div",
-        { class: "feature-keys", "aria-hidden": "true" },
-        row("사이트 찾기", ["⌘", "K"]),
-        row("이동", ["↑", "↓"]),
-        row("열기", ["Enter"])
-      )
-    );
-  }
-
-  function buildTiers() {
-    const all = LAB.ordered();
-    clear(tiersHost);
-    LAB.tiers.forEach((tier) => {
-      const apps = all.filter((app) => app.tier === tier.key);
-      if (!apps.length) return;
-      const row = el(
-        "section",
-        {
-          class: `tier${tier.key === "champ" ? " tier--champ" : ""}`,
-          style: { "--tier": tier.color, "--tier-soft": tier.soft },
-          "aria-labelledby": `tier-${tier.key}`,
-        },
-        el(
-          "div",
-          { class: "tier-label" },
-          el("span", { class: "tier-no", "aria-hidden": "true", text: tier.no }),
-          el("h3", {
-            class: `tier-name${tier.name === tier.no ? " sr-only" : ""}`,
-            id: `tier-${tier.key}`,
-            text: tier.name,
-          }),
-          el("span", { class: "tier-count", text: `${apps.length}곳` }),
-          el("p", { class: "hint", text: tier.note })
-        ),
-        el(
-          "div",
-          { class: "tier-cards" },
-          ...apps.map((app) => (tier.key === "champ" ? featureFor(app) : cardFor(app)))
-        )
-      );
-      tiersHost.append(row);
-    });
-  }
 
   function stopApp() {
     if (typeof cleanup === "function") {
@@ -11823,7 +11725,7 @@ window.LAB.palette = (function () {
     const target = hash && hash.length > 1 ? document.getElementById(hash.slice(1)) : null;
     if (target) {
       requestAnimationFrame(() => target.scrollIntoView({ block: "start", behavior: "smooth" }));
-    } else if (hash !== "#table") {
+    } else {
       window.scrollTo({ top: 0, behavior: "auto" });
     }
   }
@@ -11850,7 +11752,7 @@ window.LAB.palette = (function () {
         "a",
         { class: "crumb", href: "#/" },
         el("span", { html: icon("back", 15), "aria-hidden": "true" }),
-        "티어표"
+        "아이디어웹"
       ),
       el(
         "div",
@@ -11874,8 +11776,7 @@ window.LAB.palette = (function () {
         el(
           "span",
           { class: "tier-pill" },
-          el("b", { text: tier.name }),
-          el("span", { text: `· ${app.original}` })
+          el("span", { text: app.original })
         ),
         el("h1", { class: "workbench-title", tabindex: "-1", text: app.name }),
         el("p", { class: "workbench-lede", text: app.blurb })
@@ -11938,20 +11839,10 @@ window.LAB.palette = (function () {
         renderApp(app);
         return;
       }
-      toast("없는 사이트입니다. 티어표로 돌아갑니다");
+      toast("없는 사이트입니다. 아이디어웹으로 돌아갑니다");
     }
     showHome(hash === "#/" ? "" : hash);
   }
-
-  buildTiers();
-
-  document.querySelectorAll("[data-random]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const pool = LAB.ordered().filter((app) => app.id !== currentId);
-      const app = pick(pool.length ? pool : LAB.apps);
-      location.hash = `#/a/${app.id}`;
-    });
-  });
 
   window.addEventListener("hashchange", route);
   route();

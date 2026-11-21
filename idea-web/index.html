@@ -857,7 +857,7 @@ pre {
   letter-spacing: 0.02em;
 }
 
-.tier-cards {
+.idea-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 18px;
@@ -877,6 +877,14 @@ pre {
   box-shadow: 4px 4px 0 rgb(23 20 14 / 0.13);
   transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
   overflow: hidden;
+}
+
+.idea-cards .card {
+  --tier: var(--signal);
+}
+
+.idea-cards .card-name {
+  padding-right: 0;
 }
 
 .card::before {
@@ -1306,7 +1314,7 @@ pre {
 
 .palette-item {
   display: grid;
-  grid-template-columns: 52px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
   width: 100%;
@@ -1463,7 +1471,7 @@ pre {
     display: none;
   }
 
-  .tier-cards {
+  .idea-cards {
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   }
 
@@ -1491,7 +1499,7 @@ pre {
 }
 
 @media (max-width: 460px) {
-  .tier-cards {
+  .idea-cards {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -4821,8 +4829,6 @@ pre {
         </a>
         <nav class="site-nav" aria-label="주요 메뉴">
           <a href="/">하만코리아</a>
-          <a href="#notes">제작 노트</a>
-          <a href="#how">실행 안내</a>
         </nav>
         <div class="head-actions">
           <button class="kbd-btn" type="button" data-open-palette aria-haspopup="dialog">
@@ -4836,94 +4842,15 @@ pre {
     <main id="main">
       <p class="wrap" style="padding-block:12px;font-size:14px;line-height:1.6">아이디어웹 · 독립적으로 만든 체험용 데모입니다. 원본 서비스와 제휴 관계가 없으며 실제 결제는 이루어지지 않습니다. 실제 카드번호·비밀번호·개인정보는 입력하지 마세요.</p>
       <div class="view" id="home">
-        <section class="table-section wrap" aria-labelledby="ideas-title">
+        <section class="table-section wrap" id="ideas" aria-labelledby="ideas-title">
           <div class="section-head">
             <h1 id="ideas-title">아이디어웹</h1>
             <nav class="section-actions" aria-label="아이디어웹 체험">
-              <a class="btn btn--sm btn--ghost" href="./arcade/">아케이드 게임 10종</a>
+              <button class="btn btn--sm" type="button" data-random>무작위 체험</button>
               <button class="btn btn--sm btn--ghost" type="button" data-open-palette>이름으로 찾기</button>
             </nav>
           </div>
-        </section>
-
-        <section class="notes wrap" id="notes" aria-labelledby="notes-title">
-          <div class="notes-grid">
-            <h2 class="notes-title" id="notes-title">제작<br />노트</h2>
-            <ol class="notes-list">
-              <li class="note">
-                <span class="note-no" aria-hidden="true">01</span>
-                <div>
-                  <h3>아이디어와 동작만 가져왔습니다</h3>
-                  <p>
-                    로고, 화면 디자인, 사이트에 적힌 문구는 원본 회사의 것입니다. 이 페이지는
-                    같은 기능을 새로 구현한 오마주이며, 원본과 연결되거나 제휴된 페이지가
-                    아닙니다.
-                  </p>
-                </div>
-              </li>
-              <li class="note">
-                <span class="note-no" aria-hidden="true">02</span>
-                <div>
-                  <h3>설치도, 서버도, 계정도 필요 없습니다</h3>
-                  <p>
-                    모두 브라우저에서 도는 정적 페이지입니다. 데이터는 서버로 보내지 않고,
-                    기록이 필요한 곳은 브라우저 저장소에만 남깁니다.
-                  </p>
-                </div>
-              </li>
-              <li class="note">
-                <span class="note-no" aria-hidden="true">03</span>
-                <div>
-                  <h3>원본이 AI를 쓰는 곳은 간이 모델로</h3>
-                  <p>
-                    꼬맨틀의 유사도, 인피니트 크래프트의 조합, 퀵 드로우의 필기 인식은
-                    브라우저에서 도는 작은 규칙·모델로 대신했습니다. 원본과 결과가 정확히
-                    같지는 않습니다.
-                  </p>
-                </div>
-              </li>
-            </ol>
-          </div>
-        </section>
-
-        <section class="notes wrap" id="how" aria-labelledby="how-title">
-          <div class="notes-grid">
-            <h2 class="notes-title" id="how-title">실행<br />안내</h2>
-            <ol class="notes-list">
-              <li class="note">
-                <span class="note-no" aria-hidden="true">01</span>
-                <div>
-                  <h3>가장 빠른 방법</h3>
-                  <p>
-                    <code>D:\shinbak-lab\index.html</code> 파일을 브라우저로 열면 바로
-                    실행됩니다. 인터넷이 없으면 글꼴만 기본 글꼴로 바뀌고 기능은 그대로
-                    동작합니다.
-                  </p>
-                </div>
-              </li>
-              <li class="note">
-                <span class="note-no" aria-hidden="true">02</span>
-                <div>
-                  <h3>로컬 서버로 열기</h3>
-                  <p>
-                    폴더에서 <code>python -m http.server 8123</code> 를 실행한 뒤
-                    <code>http://localhost:8123</code> 을 열어도 됩니다. 저장 기능을 쓰려면
-                    이쪽이 더 안정적입니다.
-                  </p>
-                </div>
-              </li>
-              <li class="note">
-                <span class="note-no" aria-hidden="true">03</span>
-                <div>
-                  <h3>바로 가기</h3>
-                  <p>
-                    <span class="kbd">⌘K</span> 로 검색, <span class="kbd">Esc</span> 로 닫기.
-                    주소 끝에 <code>#/a/pointer</code> 처럼 앱 이름을 붙이면 바로 열립니다.
-                  </p>
-                </div>
-              </li>
-            </ol>
-          </div>
+          <div class="idea-cards" id="idea-cards"></div>
         </section>
       </div>
 
@@ -4934,7 +4861,7 @@ pre {
           <h2 class="display" style="font-size: 2rem; margin-bottom: 12px">자바스크립트가 필요합니다</h2>
           <p class="hint">
             이 페이지의 체험은 모두 브라우저 자바스크립트로 동작합니다. 자바스크립트를 켜면
-            포인터 포인터, 스펜드 빌 게이츠 머니, 더 패스워드 게임 등 23곳을 바로 만져볼 수
+            포인터 포인터, 스펜드 빌 게이츠 머니, 더 패스워드 게임 등 22곳을 바로 만져볼 수
             있습니다.
           </p>
         </section>
@@ -4979,7 +4906,7 @@ pre {
           <span><span class="kbd">↑</span><span class="kbd">↓</span> 이동</span>
           <span><span class="kbd">Enter</span> 열기</span>
           <span><span class="kbd">Esc</span> 닫기</span>
-          <span>23곳</span>
+          <span id="palette-count"></span>
         </div>
       </div>
     </div>
@@ -5292,6 +5219,11 @@ window.LAB = (function () {
       .map((row) => row.app)
       .map((app, index) => Object.assign(app, { position: index + 1 }));
 
+  const collator = new Intl.Collator("ko", { numeric: true });
+  const browse = () =>
+    apps.filter((app) => app.id !== "linear")
+      .sort((a, b) => collator.compare(a.name, b.name) || a.id.localeCompare(b.id));
+
   const add = (app) => {
     if (!app || !app.id || !app.mount) {
       console.warn("LAB.add: id와 mount가 필요합니다", app);
@@ -5304,7 +5236,7 @@ window.LAB = (function () {
     apps.push(app);
   };
 
-  return { tiers, apps, add, byId, ordered, tierOf, orderOf };
+  return { tiers, apps, add, byId, browse, ordered, tierOf, orderOf };
 })();
 
 </script>
@@ -11543,6 +11475,7 @@ window.LAB.palette = (function () {
   const root = document.getElementById("palette");
   const input = document.getElementById("palette-input");
   const list = document.getElementById("palette-list");
+  const count = document.getElementById("palette-count");
   const panel = root.querySelector(".palette-panel");
   const { el, clear } = window.UI;
 
@@ -11555,15 +11488,15 @@ window.LAB.palette = (function () {
 
   const match = (app, query) => {
     if (!query) return true;
-    const tier = window.LAB.tierOf(app);
     const haystack = normalize(
-      [app.name, app.original, app.tag, app.blurb, tier.name, app.info].join(" ")
+      [app.name, app.original, app.tag, app.blurb, app.info].join(" ")
     );
     return query.split(" ").every((word) => haystack.includes(word));
   };
 
   const paint = (query) => {
-    results = window.LAB.ordered().filter((app) => match(app, query));
+    results = window.LAB.browse().filter((app) => match(app, query));
+    count.textContent = `${results.length}곳`;
     selected = 0;
     clear(list);
 
@@ -11579,7 +11512,6 @@ window.LAB.palette = (function () {
     }
 
     results.forEach((app, index) => {
-      const tier = window.LAB.tierOf(app);
       const item = el(
         "button",
         {
@@ -11588,7 +11520,6 @@ window.LAB.palette = (function () {
           role: "option",
           id: `palette-item-${app.id}`,
           "aria-selected": index === 0 ? "true" : "false",
-          style: { "--tier": tier.color },
           dataset: { id: app.id },
         },
         el("span", { class: "p-name", text: app.name }),
@@ -11690,20 +11621,31 @@ window.LAB.palette = (function () {
 </script>
     <script>
 /* assets/js/shell.js */
-/* shell — home tiers, hash router, workbench mounting */
+/* shell — demo grid, hash router, workbench mounting */
 (function () {
   "use strict";
 
-  const { el, clear, toast, icon } = window.UI;
+  const { el, clear, pick, toast, icon } = window.UI;
   const LAB = window.LAB;
   const baseTitle = document.title;
   const home = document.getElementById("home");
   const appView = document.getElementById("app");
+  const cards = document.getElementById("idea-cards");
 
   let cleanup = null;
   let currentId = null;
 
-  const pad = (n) => String(n).padStart(2, "0");
+  function buildCards() {
+    cards.append(...LAB.browse().map((app) =>
+      el("a",
+        { class: "card", href: `#/a/${app.id}`, dataset: { app: app.id } },
+        el("span", { class: "card-tag", text: app.tag }),
+        el("span", { class: "card-name", text: app.name }),
+        el("span", { class: "card-blurb", text: app.blurb }),
+        el("span", { class: "card-go", text: "체험" })
+      )
+    ));
+  }
 
   function stopApp() {
     if (typeof cleanup === "function") {
@@ -11722,7 +11664,7 @@ window.LAB.palette = (function () {
     appView.hidden = true;
     home.hidden = false;
     document.title = baseTitle;
-    const target = hash && hash.length > 1 ? document.getElementById(hash.slice(1)) : null;
+    const target = hash && hash.length > 1 ? document.getElementById(hash === "#table" ? "ideas" : hash.slice(1)) : null;
     if (target) {
       requestAnimationFrame(() => target.scrollIntoView({ block: "start", behavior: "smooth" }));
     } else {
@@ -11733,7 +11675,7 @@ window.LAB.palette = (function () {
   function renderApp(app) {
     stopApp();
     const tier = LAB.tierOf(app);
-    const all = LAB.ordered();
+    const all = LAB.browse();
     const index = all.findIndex((row) => row.id === app.id);
     const prev = all[(index - 1 + all.length) % all.length];
     const next = all[(index + 1) % all.length];
@@ -11757,7 +11699,6 @@ window.LAB.palette = (function () {
       el(
         "div",
         { class: "row" },
-        el("span", { class: "mono", text: `${pad(app.position)} / ${all.length}` }),
         el("button", {
           class: "btn btn--sm btn--ghost",
           type: "button",
@@ -11843,6 +11784,14 @@ window.LAB.palette = (function () {
     }
     showHome(hash === "#/" ? "" : hash);
   }
+
+  buildCards();
+  document.querySelectorAll("[data-random]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const pool = LAB.browse().filter((app) => app.id !== currentId);
+      if (pool.length) location.hash = `#/a/${pick(pool).id}`;
+    });
+  });
 
   window.addEventListener("hashchange", route);
   route();

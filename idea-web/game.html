@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>흑백 점프 · 신박랩</title>
+    <title>게임방 · 신박랩 | 하만코리아</title>
     <meta
       name="description"
       content="클래식 횡스크롤을 1비트 흑백으로 옮긴 오리지널 웹 게임. 두 개의 스테이지를 통과해 결승문까지 달려 보세요."
@@ -683,17 +683,27 @@
           transition-duration: 0.001ms !important;
         }
       }
+    
+      .game-room-arcade { margin: clamp(40px,7vw,84px) 0 48px; border-top: 2px solid var(--ink); padding-top: 26px; }
+      .game-room-arcade > .mono { color: var(--ink-faint); }
+      .game-room-arcade h2 { font: clamp(1.7rem,5vw,2.7rem)/1.2 var(--font-display); margin: 7px 0 12px; }
+      .game-room-arcade ul { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-direction: column; gap: 9px; }
+      .game-room-arcade li a { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:68px; padding:10px 16px; background:var(--paper-raised); border:1px solid var(--line-strong); }
+      .game-room-arcade li a:hover { border-color:var(--ink); background:var(--paper-deep); }
+      .game-room-arcade li strong,.game-room-arcade li span { display:block; }
+      .game-room-arcade li span,.game-room-arcade li small { color:var(--ink-soft); }
+      .game-room-arcade li small { flex-shrink:0; }
     </style>
   </head>
   <body>
     <header class="gh">
       <div class="wrap gh-inner">
         <div class="gh-left">
-          <a class="back" href="index.html">← 티어표</a>
+          <a class="back" href="/">← 하만코리아</a>
           <span class="brand">신박랩</span>
         </div>
         <div class="gh-right">
-          <a class="gh-link" href="index.html#table">23곳 보기</a>
+          <a class="gh-link" href="#arcade">아케이드 10종</a>
           <button class="sound" type="button" id="sound-top" aria-pressed="true">소리 끄기</button>
         </div>
       </div>
@@ -743,7 +753,7 @@
         <div class="under-actions">
           <button class="btn btn--primary" type="button" id="btn-restart">다시 시작</button>
           <button class="btn" type="button" id="sound-bottom" aria-pressed="true">소리 끄기</button>
-          <a class="btn" href="index.html">티어표로</a>
+          <a class="btn" href="/">홈페이지로</a>
         </div>
         <span class="record">최고 기록 <b id="best-time">—</b></span>
       </div>
@@ -780,6 +790,23 @@
           <h3>목숨은 세 개</h3>
           <p>떨어지거나 부딪히면 체크포인트에서 다시 시작합니다. 마지막 스테이지까지 가면 기록이 저장됩니다.</p>
         </div>
+      </section>
+      <section class="game-room-arcade" id="arcade" aria-labelledby="arcade-heading">
+        <p class="mono">SHINBAK-LAB ARCADE</p>
+        <h2 id="arcade-heading">아케이드 게임 10종</h2>
+        <p>아래에서 게임을 하나 골라 바로 플레이하세요.</p>
+        <ul>
+          <li><a href="./arcade/#tetris"><div><strong>블록 스택</strong><span>클래식 &amp; 갤럭시</span></div><small>퍼즐</small></a></li>
+          <li><a href="./arcade/#breakout"><div><strong>벽돌 깨기</strong><span>벽돌 부수기</span></div><small>아케이드</small></a></li>
+          <li><a href="./arcade/#snake"><div><strong>뱀</strong><span>먹고 길어지기</span></div><small>아케이드</small></a></li>
+          <li><a href="./arcade/#pong"><div><strong>퐁</strong><span>탁구 대결</span></div><small>스포츠</small></a></li>
+          <li><a href="./arcade/#flappy"><div><strong>플래피</strong><span>한 번의 날갯짓</span></div><small>액션</small></a></li>
+          <li><a href="./arcade/#g2048"><div><strong>2048</strong><span>숫자 합치기</span></div><small>퍼즐</small></a></li>
+          <li><a href="./arcade/#mines"><div><strong>지뢰찾기</strong><span>지뢰 피하기</span></div><small>퍼즐</small></a></li>
+          <li><a href="./arcade/#invaders"><div><strong>우주 침공</strong><span>에일리언 격추</span></div><small>슈팅</small></a></li>
+          <li><a href="./arcade/#frogger"><div><strong>개구리 건너기</strong><span>길과 강 건너기</span></div><small>액션</small></a></li>
+          <li><a href="./arcade/#simon"><div><strong>사이먼</strong><span>순서 기억하기</span></div><small>기억</small></a></li>
+        </ul>
       </section>
     </main>
 

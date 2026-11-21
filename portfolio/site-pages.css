@@ -16,3 +16,26 @@
   .hk-page-nav{grid-area:nav;justify-content:flex-start;min-width:0}
   .hk-contact-cta{grid-area:contact;justify-self:end}
 }
+
+/* Compact Web/App disclosures, shared across the portfolio routes. */
+.hk-page-header{position:relative;z-index:16}
+.hk-page-nav{gap:4px 14px}
+.hk-page-nav > a{display:inline-flex;align-items:center;min-height:44px}
+.hk-menu-group{position:relative;min-width:0}
+.hk-menu-summary{display:flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:0 11px;border:1px solid #d3cec1;border-radius:7px;background:#fffdf7;color:#141413;cursor:pointer;font-weight:700;white-space:nowrap;list-style:none}
+.hk-menu-summary::-webkit-details-marker{display:none}
+.hk-menu-summary::marker{content:""}
+.hk-menu-chevron{display:block;font-size:18px;line-height:1;transform:translateY(-2px)}
+.hk-page-nav .hk-menu-summary:is(:hover,.is-current),.hk-menu-group[open]>.hk-menu-summary{border-color:#7d6850;background:#eee8dc}
+.hk-menu-group[open]>.hk-menu-summary .hk-menu-chevron{transform:rotate(180deg)}
+.hk-menu-summary:focus-visible{outline:2px solid #8b6f47;outline-offset:3px}
+.hk-menu-panel{position:absolute;inset-block-start:calc(100% + 6px);inset-inline-start:0;min-width:210px;max-width:min(260px,calc(100vw - 40px));list-style:none;margin:0;padding:5px;background:#fffdf7;border:1px solid #d3cec1;border-radius:9px;box-shadow:0 9px 25px #14141320;z-index:2}
+.hk-menu-group:not([open])>.hk-menu-panel{display:none}
+.hk-page-nav .hk-menu-panel a{display:flex;align-items:center;min-height:44px;padding:7px 10px;border-radius:5px;font-size:13px;white-space:normal;color:#2b3029}
+.hk-page-nav .hk-menu-panel a::after{display:none}
+.hk-page-nav .hk-menu-panel a:is(:hover,:focus-visible,[aria-current=page]){background:#eee8dc;color:#141413}
+@media(max-width:600px){
+ .hk-page-nav{position:relative;gap:3px 12px}
+ .hk-page-nav>.hk-menu-group{position:static}
+ .hk-menu-panel{inset-block-start:46px;inset-inline:0;min-width:0;max-width:none}
+}
